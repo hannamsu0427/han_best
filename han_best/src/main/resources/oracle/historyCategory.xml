@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="historyCategory">
+
+	<typeAlias alias="historyCategory" type="com.itsp.vo.HistoryVO" />
+
+	<resultMap id="Map" class="historyCategory">
+		<result property="configSeq" column="CONFIG_SEQ" />
+		<result property="configName" column="CONFIG_NAME" />
+		<result property="categorySeq" column="CATEGORY_Seq" />
+		<result property="categoryName" column="CATEGORY_NAME" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="modDate" column="MOD_DATE" />
+		<result property="useYn" column="USE_YN" />
+		<result property="orderNum" column="ORDER_NUM" />
+	</resultMap>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_HISTORY_CATEGORY
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="configSeq">
+			CONFIG_SEQ = #configSeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="categorySeq">
+			CATEGORY_SEQ = #categorySeq#
+		</isNotEmpty>
+	</select>
+
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #categorySeq#;
+		BEGIN
+			SELECT COUNT(CATEGORY_SEQ) INTO I_COUNT FROM I_HISTORY_CATEGORY WHERE CATEGORY_SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_HISTORY_CATEGORY SET
+					CATEGORY_NAME = <![CDATA[ #categoryName#]]>,
+					USE_YN = #useYn#,
+					MOD_DATE = SYSDATE
+				WHERE CATEGORY_SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_HISTORY_CATEGORY (
+					CONFIG_SEQ,
+					CATEGORY_SEQ,
+					CATEGORY_NAME,
+					USE_YN,
+					ORDER_NUM
+				) VALUES(
+					#configSeq#,
+					I_SEQ,
+					#categoryName#,
+					#useYn#,
+					#orderNum#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_HISTORY_CATEGORY WHERE CATEGORY_SEQ = #categorySeq#
+	</delete>
+	
+	<update id="orderNumProc">
+		UPDATE I_HISTORY_CATEGORY SET
+			ORDER_NUM = #orderNum#,
+			MOD_DATE = SYSDATE
+		WHERE CATEGORY_SEQ = #categorySeq#
+	</update>
+
+	<select id="selectListData" resultMap="Map">
+		SELECT 
+			CONFIG_SEQ,
+			(SELECT TITLE FROM I_HISTORY_CONFIG WHERE 1=1 AND SEQ = X.CONFIG_SEQ) AS CONFIG_NAME,
+			CATEGORY_SEQ,
+			CATEGORY_NAME,
+			REG_DATE,
+			MOD_DATE,
+			USE_YN,
+			ORDER_NUM
+		FROM I_HISTORY_CATEGORY X
+		WHERE 1=1
+		AND CONFIG_SEQ = #configSeq#
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		ORDER BY ORDER_NUM ASC, REG_DATE DESC
+	</select>
+
+	<select id="selectData" resultMap="Map">
+		SELECT 
+			CONFIG_SEQ,
+			(SELECT TITLE FROM I_HISTORY_CONFIG WHERE 1=1 AND SEQ = X.CONFIG_SEQ) AS CONFIG_NAME,
+			CATEGORY_SEQ,
+			CATEGORY_NAME,
+			REG_DATE,
+			MOD_DATE,
+			USE_YN,
+			ORDER_NUM
+		FROM I_HISTORY_CATEGORY X
+		WHERE 1=1
+		AND CATEGORY_SEQ = #categorySeq#
+	</select>
+
+
+</sqlMap>

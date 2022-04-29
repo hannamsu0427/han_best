@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="editorRecord">
+
+	<typeAlias alias="editorRecord" type="com.itsp.vo.EditorVO" />
+	
+	<resultMap id="Map" class="editorRecord">
+		<result property="configSeq" column="CONFIG_SEQ" />
+		<result property="configName" column="CONFIG_NAME" />
+		
+		<result property="seq" column="SEQ" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		<result property="regId" column="REG_ID" />
+		<result property="regName" column="REG_NAME" />
+	</resultMap>	
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_EDITOR_RECORD
+		WHERE 1=1
+		AND CONFIG_SEQ = #configSeq#
+	</select>
+	
+	<select id="selectListData" resultMap="Map">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT
+						CONFIG_SEQ,
+						(SELECT TITLE FROM I_EDITOR_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+						SEQ,
+						CONTENTS,
+						REG_ID,
+						REG_NAME,
+						TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+						TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT
+					FROM I_EDITOR_RECORD X
+					WHERE 1=1 
+					AND CONFIG_SEQ = #configSeq#
+					<isNotEmpty prepend="AND" property="seq">
+					SEQ = #seq#
+					</isNotEmpty>
+				) A
+				ORDER BY REG_DATE_FMT DESC, SEQ DESC
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum# AND #endNum#
+		</isNotEmpty>
+		ORDER BY RNUM2
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM (
+			SELECT 
+				CONFIG_SEQ,
+				(SELECT TITLE FROM I_EDITOR_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+				SEQ,
+				CONTENTS,
+				TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+				TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+				REG_ID,
+				REG_NAME
+			FROM(
+				SELECT 
+					CONFIG_SEQ,
+					SEQ,
+					CONTENTS,
+					REG_DATE,
+					REG_ID,
+					REG_NAME
+				FROM I_EDITOR_RECORD
+				WHERE 1=1
+				AND CONFIG_SEQ = #configSeq#
+			)
+		)
+		WHERE SEQ= #seq#
+	</select>
+	
+	<insert id="insertProcData">
+		INSERT INTO I_EDITOR_RECORD (
+			CONFIG_SEQ,
+			SEQ,
+			CONTENTS,
+			REG_ID,
+			REG_NAME,
+			REG_IP
+		) VALUES(
+			#configSeq#,
+			#seq#,
+			#contents#,
+			#regId#,
+			#regName#,
+			#regIp#
+		)
+	</insert>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_EDITOR_RECORD WHERE SEQ = #seq#
+	</delete>
+
+
+</sqlMap>

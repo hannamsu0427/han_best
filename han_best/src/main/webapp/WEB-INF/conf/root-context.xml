@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>
+					classpath:jdbc.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- db접속 정보 -->
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="dataSourceMbs" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc_mbs.url}" />
+		<property name="username" value="${jdbc_mbs.username}" />
+		<property name="password" value="${jdbc_mbs.password}" />
+	</bean>
+	
+	<bean id="dataSourceFn" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc_fn.url}" />
+		<property name="username" value="${jdbc_fn.username}" />
+		<property name="password" value="${jdbc_fn.password}" />
+	</bean>
+
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/conf/sqlmap-config.xml" />
+	</bean>
+
+	<bean id="sqlMapClientMbs" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSourceMbs" />
+		<property name="configLocation" value="/WEB-INF/conf/sqlmap-mbs-config.xml" />
+	</bean>
+	
+	<bean id="sqlMapClientFn" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSourceFn" />
+		<property name="configLocation" value="/WEB-INF/conf/sqlmap-fn-config.xml" />
+	</bean>
+	
+	<bean id="ApplicationDao" class="com.itsp.dao.ApplicationImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="AttachFileDao" class="com.itsp.dao.AttachFileImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="BoardDao" class="com.itsp.dao.BoardImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="DirectionsDao" class="com.itsp.dao.DirectionsImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="EditorDao" class="com.itsp.dao.EditorImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="EtcDao" class="com.itsp.dao.EtcImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="FacilityDao" class="com.itsp.dao.FacilityImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="GoogleAnalyticsDao" class="com.itsp.dao.GoogleAnalyticsImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="HistoryDao" class="com.itsp.dao.HistoryImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="MajorDao" class="com.itsp.dao.MajorImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="MemberDao" class="com.itsp.dao.MemberImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="MenuDao" class="com.itsp.dao.MenuImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="PopUpDao" class="com.itsp.dao.PopUpImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="ScheduleDao" class="com.itsp.dao.ScheduleImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="SwearWordDao" class="com.itsp.dao.SwearWordImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="VisitDao" class="com.itsp.dao.VisitImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="VisualDao" class="com.itsp.dao.VisualImp">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="HjMemberDao" class="com.itsp.dao.HjMemberImp">
+		<property name="sqlMapClient" ref="sqlMapClientMbs" />
+	</bean>
+	
+	<bean id="FuncMemberDao" class="com.itsp.dao.FuncMemberImp">
+		<property name="sqlMapClient" ref="sqlMapClientFn" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.itsp.common.CustomGenericException">error/generic_error</prop>
+				<prop key="java.lang.Exception">error/exception</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

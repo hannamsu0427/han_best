@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="directions">
+
+	<typeAlias alias="directions" type="com.itsp.vo.DirectionsVO" />
+	
+	<resultMap id="MapForList" class="directions">
+		<result property="rnum" column="RNUM" />
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		<result property="address" column="ADDRESS" />
+		<result property="detailAddress" column="DETAIL_ADDRESS" />
+		
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		
+		<result property="modDate" column="MOD_DATE" />
+		<result property="modDateFmt" column="MOD_DATE_FMT" />
+	</resultMap>	
+	
+	<resultMap id="Map" class="directions">
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		<result property="address" column="ADDRESS" />
+		<result property="detailAddress" column="DETAIL_ADDRESS" />
+		
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		
+		<result property="modDate" column="MOD_DATE" />
+		<result property="modDateFmt" column="MOD_DATE_FMT" />
+	</resultMap>	
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_DIRECTIONS_RECORD
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="seq">
+			SEQ = #seq#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectListData" resultMap="MapForList">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT
+						SEQ,
+						TITLE,
+						CONTENTS,
+						ADDRESS,
+						DETAIL_ADDRESS,
+						TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+						TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+						TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE,
+						TO_CHAR(MOD_DATE, 'YYYY-MM-DD HH24:MI') AS MOD_DATE_FMT
+					FROM I_DIRECTIONS_RECORD X
+					WHERE 1=1 
+					<isNotEmpty prepend="AND" property="seq">
+					SEQ = #seq#
+					</isNotEmpty>
+				) A
+				ORDER BY REG_DATE_FMT DESC, SEQ DESC
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum# AND #endNum#
+		</isNotEmpty>
+		ORDER BY RNUM2
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT 
+			SEQ,
+			TITLE,
+			CONTENTS,
+			ADDRESS,
+			DETAIL_ADDRESS,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+			TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE,
+			TO_CHAR(MOD_DATE, 'YYYY-MM-DD HH24:MI') AS MOD_DATE_FMT
+		FROM I_DIRECTIONS_RECORD
+		WHERE 1=1
+		AND SEQ = #seq#
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_DIRECTIONS_RECORD WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_DIRECTIONS_RECORD SET
+					TITLE = #title#,
+					CONTENTS = <![CDATA[ #contents#]]>,
+					ADDRESS = <![CDATA[ #address#]]>,
+					DETAIL_ADDRESS = <![CDATA[ #detailAddress#]]>,
+					MOD_DATE = SYSDATE,
+					MOD_ID = #modId#,
+					MOD_IP = #modIp#
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_DIRECTIONS_RECORD (
+					SEQ,
+					TITLE,
+					CONTENTS,
+					ADDRESS,
+					DETAIL_ADDRESS,
+					REG_ID,
+					REG_IP
+				) VALUES(
+					I_SEQ,
+					#title#,
+					#contents#,
+					#address#,
+					#detailAddress#,
+					#regId#,
+					#regIp#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_DIRECTIONS_RECORD WHERE SEQ = #seq#
+	</delete>
+
+
+</sqlMap>

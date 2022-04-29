@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="funcDb">
+
+	<typeAlias alias="memberVO" type="com.itsp.vo.MemberVO" />
+	
+	<select id="functionCheck" resultClass="string">
+		SELECT hjdb.func_login_chiims(#user_id#, #user_pwd#) as result FROM DUAL
+	</select>
+	
+	<update id="functionUpdate">
+		update cddb.kch910m
+		set acc_status = 'N',
+			acc_date = sysdate
+		where user_id = #user_id#
+	</update>
+	
+	
+</sqlMap>

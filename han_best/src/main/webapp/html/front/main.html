@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta http-equiv="X-UA-TextLayoutMetrics" content="gdi">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="apple-mobile-web-app-title" content="글로벌문화예술교육원">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+<meta name="HandheldFriendly" content="true">
+<meta name="Title" content="글로벌문화예술교육원" >
+<meta name="Description" content="글로벌문화예술교육원 교육원소개,계열안내,일반과정,학사안내">
+<meta name="Keywords" content="글로벌문화예술교육원 교육원소개,계열안내,일반과정,학사안내">
+<meta name="Robots" content="INDEX,FOLLOW">
+<meta property="og:url" content="https://www.cgc.ac.kr">
+<meta property="og:type" content="website" >
+<meta property="og:title" content="글로벌문화예술교육원">
+<meta property="og:description" content="글로벌문화예술교육원 교육원소개,계열안내,일반과정,학사안내">
+<meta property="og:image" content="https://www.chugye.ac.kr/images/common/h1_logo.png">
+
+<title>글로벌문화예술교육원</title>
+<!-- 
+<link rel="shortcut icon" type="image/x-icon" href="https://www.chugye.ac.kr/images/common/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.chugye.ac.kr/images/common/favicon.png">
+<link rel="apple-touch-startup-image" type="image/png" sizes="32x32" href="https://www.chugye.ac.kr/images/common/touch_startup.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://www.chugye.ac.kr/images/common/touch_icon.png">
+ -->
+<link href="/css/front/style.css" rel="stylesheet" type="text/css">
+<link href="/css/front/main.css" rel="stylesheet" type="text/css">
+<link href="/css/front/keyframes.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="/common/js/jQuery/jquery-1.9.0.min.js"></script>
+
+<script type="text/javascript" src="/common/js/bxslider/jquery.bxslider.min.js"></script>
+<link type="text/css" href="/common/js/bxslider/jquery.bxslider.css" rel="stylesheet">
+<script type="text/javascript">
+	var floatPosition = parseInt($("#floatMenu").css('top'));
+		$(window).scroll(function() {
+			var scrollTop = $(window).scrollTop();	
+			 if(0 < scrollTop){
+				$("#header").css("background-color", "rgba(0, 0, 0, 0.7)");
+			}else{
+				$("#header").css("background-color", "rgba(0, 0, 0, 0)");
+			}
+			
+			var newPosition = scrollTop + floatPosition + "px";
+			$("#floatMenu").stop().animate({
+				"top" : newPosition
+			}, 500);
+		
+		}).scroll();
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var $slider;
+	function buildSliderConfiguration() {
+		var windowWidth = $(window).width();
+		var autoControlsCombineResult;
+		var pagerTypeResult;
+		
+		if (windowWidth < 768) { 
+			autoControlsCombineResult = true;
+			pagerTypeResult = 'short';
+		} else {
+			autoControlsCombineResult = true;
+			pagerTypeResult = '';
+		}
+		
+		return {
+			auto: true,
+			mode:'fade',
+			controls:true,
+			autoControls: true, 
+			stopAutoOnClick: true,
+			pager:true,
+			
+			autoControlsCombine : autoControlsCombineResult,
+			pagerType :pagerTypeResult,
+			pagerShortSeparator :'		'
+		}; 
+	} 
+	
+	function configureSlider() { 
+		var config = buildSliderConfiguration();
+		if ($slider && $slider.reloadSlider) {
+			$slider.reloadSlider(config);
+		} else {
+			$slider = $('.bxslider').bxSlider(config);
+		} 
+	} 
+	
+	$(window).on("orientationchange resize", configureSlider); 
+	configureSlider(); 
+});
+</script>
+
+
+
+<!-- PC 버전 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#nav').bind({
+			"mouseenter focusin": function() {		
+				$(".gnb_inner > .nav > ul> li > div").css("display","block");
+				$(".gnb_inner > .nav > ul> li > a").css("color","#000");
+				$(".nav").addClass("white");
+				$(".header_inner_pc > h1 > a").css({ 'background' : 'url(/images/front/common/h1_logo_on.png) no-repeat 0 50%','background-size' : '100% 32px'});
+				$(".header_inner_pc > .graduate > a").css({ 'background' : 'url(/images/front/common/graduate_on.png) no-repeat'});
+				$(".hidden_popup_top > .bt_popup > .open").css({ 'color' : '#f48729','background' : 'url(/images/front/common/bt_ico_popup_on.png) no-repeat 100% 50%'});
+			},
+			"mouseleave focusout": function() { 
+				$(".gnb_inner > .nav > ul > li > div").css("display","none");
+				$(".gnb_inner > .nav > ul> li > a").css("color","#fff");
+				$(".nav").removeClass("white");
+				$(".header_inner_pc > h1 > a").css({ 'background' : 'url(/images/front/common/h1_logo.png) no-repeat 0 50%','background-size' : '100% 32px'});
+				$(".header_inner_pc > .graduate > a").css({ 'background' : 'url(/images/front/common/graduate.png) no-repeat'});
+				$(".hidden_popup_top > .bt_popup > .open").css({ 'color' : '#ffffff', 'opacity' : '0.5','background' : 'url(/images/front/common/bt_ico_popup_on.png) no-repeat 100% 50%'});
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript" src="/common/js/jquery.animateNumber.min.js"></script>
+<script type="text/javascript">	
+	$(document).ready(function() {
+		var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',');
+		$('#figure02').animateNumber(
+			{
+				number: 2169,
+				numberStep: comma_separator_number_step
+			}
+		);
+	
+		$('#figure01').animateNumber({number:2004});
+		$('#figure03').animateNumber({number:111});
+		$('#figure04').animateNumber({number:159});
+		$('#figure05').animateNumber({number:964});
+		$('#figure06').animateNumber({number:61});
+		$('#figure07').animateNumber({number:37});
+		$('#figure08').animateNumber({number:22});
+	});
+</script>
+
+<script src="/common/js/jquery.malihu.PageScroll2id.min.js"></script>
+<script type="text/javascript">
+	(function($) {
+		$(window).load(function() {
+			$("#navigation a").mPageScroll2id();
+			scrollSpeed:900
+		});
+	})(jQuery);
+</script>
+<style type="text/css">
+	@media screen and (max-width: 767px) {
+		.main_visual .visual_slide .main_picture:nth-child(1) {background:url(/images/front/main/slide00_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+		.main_visual .visual_slide .main_picture:nth-child(2) {background:url(/images/front/main/slide01_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+		.main_visual .visual_slide .main_picture:nth-child(3) {background:url(/images/front/main/slide02_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+		.main_visual .visual_slide .main_picture:nth-child(4) {background:url(/images/front/main/slide03_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+		.main_visual .visual_slide .main_picture:nth-child(5) {background:url(/images/front/main/slide04_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+		.main_visual .visual_slide .main_picture:nth-child(6) {background:url(/images/front/main/slide05_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+		.main_visual .visual_slide .main_picture:nth-child(7) {background:url(/images/front/main/slide07_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+		.main_visual .visual_slide .main_picture:nth-child(8) {background:url(/images/front/main/slide08_m.jpg) no-repeat 50% 0; background-size:auto 100%;}
+}
+</style>
+
+</head>
+
+<body>
+	<div id="u_skip">
+		<a href="#" onClick="document.getElementById('header').tabIndex = -1;document.getElementById('nav').focus();return false;"><span>메뉴 바로가기</span></a> 
+		<a href="#" onClick="document.getElementById('container').tabIndex = -1;document.getElementById('container').focus();return false;"><span>컨텐츠 바로가기</span></a> 
+		<a href="#" onClick="document.getElementById('footer').tabIndex = -1;document.getElementById('footer').focus();return false;"><span>연락처 바로가기</span></a>
+	</div>	
+	
+	<div id="hidden_popup">
+		<div class="hidden_popup_top">
+			<div class="bt_popup"><a href="#" title="팝업창 열기" class="open">POP UP</a></div>
+		</div>
+		<div class="hidden_popup_wrap"><!-- display:none 기본값, open 클래스로 활성화 -->
+			<div class="hidden_inner">
+				<div class="hidden_popup_list">
+					<div id="color01" class="popup_conts">
+						<ul>
+							<li class="txt_head"><span class="txt_field">[추계 재담 웹툰아카데미]  페이스북 페이지 팔로우 이벤트! </span></li>
+							<li class="txt_year"><span class="txt_field">2019년 7월 1일(월)~ 2019년 7월 31일(수)까지</span></li>
+						</ul>
+						<a href="#" title="페이지 이동" class="txt_link"><span>바로 가기</span></a>
+					</div>
+					<div id="color02" class="popup_conts">
+						<ul>
+							<li class="txt_head"><span class="txt_field">[추계 재담 웹툰아카데미]  페이스북 페이지 팔로우 이벤트! </span></li>
+							<li class="txt_year"><span class="txt_field">2019년 7월 1일(월)~ 2019년 7월 31일(수)까지</span></li>
+						</ul>
+						<a href="#" title="페이지 이동" class="txt_link"><span>바로 가기</span></a>
+					</div>
+				</div>
+				<div class="popup_bottom_pc">
+					<div class="oneday"><input type="checkbox" id="oneday" name=""><label for="oneday" class="pl10">오늘하루 이창을 열지 않겠습니다.</label></div>
+					<div class="bt_popup"><a href="#" title="팝업창 닫기" class="close">POP UP</a></div>
+				</div>
+				<div class="popup_bottom_mobile">
+					<ul>
+						<li><a href="#" title="오늘하루 닫기" class="close">오늘하루 닫기</a></li>
+						<li><a href="#" title="팝업창 닫기" class="close">닫기</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- // hidden_inner -->
+		</div>
+		<!-- // hidden_popup_wrap -->
+	</div>
+	<!-- // hidden_popup -->
+	
+	<div id="header" class="animation fadeInDown">
+		<div class="header_inner">
+			<div class="header_inner_mobile">
+				<h1 class="h1_logo"><a href="#">글로벌문화예술교육원</a></h1>
+				<div class="bt_group">
+					<div class="bt_popup"><a href="#" title="팝업열기">팝업열기</a></div>
+					<div class="bt_nav_open trans300"><a href="#" title="팝업열기">전체메뉴 열기</a></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="gnb">
+			<div id="gnb_mobile" class="gnb_mobile"><!-- display:none 기본값, on 클래스로 활성화 -->
+				<div class="gnb_mobile_header">
+					<h1 class="h1_logo"><a href="#">글로벌문화예술교육원</a></h1>
+					<div class="bt_group">
+						<div class="bt_popup"><a href="#" title="팝업열기">팝업열기</a></div>
+						<div class="bt_nav_open"><a href="#" title="팝업열기">전체메뉴 열기</a></div>
+					</div>
+				</div>
+				<div class="gnb_inner" id="nav">
+					<div class="header_inner_pc">
+						<h1 class="h1_logo"><a href="#">글로벌문화예술교육원</a></h1>
+						<div class="graduate"><a href="#">학점은행제 학사학위과정 평가인정 훈련기관</a></div>
+					</div>
+					<div class="nav">
+						<ul class="gnb_depth1">
+							<li class="on"><a href="#"><span>교육원소개</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>교육원 소개</span></a></li>
+										<li class="on"><a href="#"><span>인사말</span></a></li>
+										<li><a href="#"><span>연혁</span></a></li>
+										<li><a href="#"><span>오시는 길</span></a></li>
+										<li><a href="#"><span>시설안내</span></a></li>
+										<li><a href="#"><span>공시정보</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>입학안내</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>모집일정요강</span></a></li>
+										<li><a href="#"><span>원서접수</span></a></li>
+										<li><a href="#"><span>원서접수확인</span></a></li>
+										<li><a href="#"><span>합격안내</span></a></li>
+										<li><a href="#"><span>브로슈어보기</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>계열안내</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>실용음악계열</span></a></li>
+										<li><a href="#"><span>무용계열</span></a></li>
+										<li><a href="#"><span>CCM계열</span></a></li>
+										<li><a href="#"><span>문예창작계열</span></a></li>
+										<li><a href="#"><span>뮤지컬계열</span></a></li>
+										<li><a href="#"><span>모델계열</span></a></li>
+										<li><a href="#"><span>연기계열</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>일반과정</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>웹튠아카데미</span></a></li>
+										<li><a href="#"><span>K-POP계열</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>학사안내</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>학점은행제</span></a></li>
+										<li><a href="#"><span>개설과목</span></a></li>
+										<li><a href="#"><span>등록안내</span></a></li>
+										<li><a href="#"><span>장학금안내</span></a></li>
+										<li><a href="#"><span>수강신청</span></a></li>
+										<li><a href="#"><span>학사일정</span></a></li>
+										<li><a href="#"><span>학사시스템</span></a></li>
+										<li><a href="#"><span>증명서발급</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>정보광장</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>공지사항</span></a></li>
+										<li><a href="#"><span>학사및규정</span></a></li>
+										<li><a href="#"><span>행사안내</span></a></li>
+										<li><a href="#"><span>활동내역</span></a></li>
+										<li><a href="#"><span>이벤트</span></a></li>
+										<li><a href="#"><span>Q&amp;A</span></a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!-- //header -->
+	
+	<div id="container">
+		<div class="main_container">
+			<section id="main_slide">
+				<h3 class="blind">학과별 슬라이드</h3>
+				<div class="main_visual">
+					<ul class="bxslider visual_slide">
+						<li class="main_picture" style="background-image:url(/images/front/main/slide00.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="원서접수 안내"></a></li>
+						<li class="main_picture" style="background-image:url(/images/front/main/slide01.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="실용음악계열"></a></li>
+						<li class="main_picture" style="background-image:url(/images/front/main/slide02.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="무용계열"></a></li>
+						<li class="main_picture" style="background-image:url(/images/front/main/slide03.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="CCM계열"></a></li>
+						<li class="main_picture" style="background-image:url(/images/front/main/slide04.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="문예창작계열"></a></li>
+						<li class="main_picture" style="background-image:url(/images/front/main/slide05.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="뮤지컬계열"></a></li>
+						<li class="main_picture" style="background-image:url(/images/front/main/slide06.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="모델계열"></a></li>
+						<li class="main_picture" style="background-image:url(/images/front/main/slide07.jpg);"><a href="#" title="바로가기"><img src="/images/front/main/main_blank.png" alt="연기계역"></a></li>
+					</ul>
+				</div>
+			</section>
+			
+			<section id="main_notice">
+				<div class="main_notice_inner">
+					<h1><span>공지사항</span></h1>
+					<ul class="ticker_list">
+						<li class="subject">
+							<a href="/#" class="subject_click">[문예창작] 2020학년도 전기3차 입시 전형시간 및 장소안내 </a>
+							<span class="write_date">2019-04-07</span>
+						</li>
+					</ul>
+					<div class="bt_control">
+						<a href="#" title="이전글" class="bt_prev">이전글</a>
+						<a href="#" title="다음글" class="bt_next">다음글</a>
+					</div>
+				</div>
+			</section>
+			
+			<section id="main_about">
+				<h1 class="animation fadeInDown">오직예술</h1>
+				<div class="main_about_inner">
+					<div class="about_video">
+						<div class="about_video_text">
+							<dl>
+								<dt>추계예술대학교 글로벌문화예술교육원은</dt>
+								<dd>
+									<span>지식과 정보를 바탕으로 개인의 삶과 국가의 발전을 위하여 생애를 거쳐</span>
+									<span>배우고 익히는 평생학습사회에서 지식을 창출하는데 다양하고 수준 높은</span> 
+									<span>교육방법을 활용하여, 문화예술 분야의 전문 인력을 양성을 목표로</span>
+									<span>차별된 프로그램을 운영하고 있습니다.</span></dd>
+							</dl>
+						</div>
+						<div class="about_video_clip">
+							<div class="vod">
+								<img src="/images/front/main/about_video_clip.png" width="100%">
+							</div>
+						</div>
+					</div>
+					<div class="about_figure">
+						<div class="about_figure_detail">
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">설립년도</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info01.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure01" class="em">0</span>년
+									</li>
+								</ul>
+							</div>
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">학습과정별 학습자 수</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info02.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure02" class="em">0</span>명
+									</li>
+								</ul>
+							</div>
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">학습과정별 개설학급 수</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info03.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure03" class="em">0</span>개
+									</li>
+								</ul>
+							</div>
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">교원수</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info04.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure04" class="em">0</span>명
+									</li>
+								</ul>
+							</div>
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">학위취득자</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info05.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure05" class="em">0</span>명
+									</li>
+								</ul>
+							</div>
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">실습실</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info06.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure06" class="em">0</span>개(수용인원 65명)
+									</li>
+								</ul>
+							</div>
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">레슨실</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info07.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure07" class="em">0</span>개(수용인원 163명)
+									</li>
+								</ul>
+							</div>
+							<div class="figure_item">
+								<ul>
+									<li class="figure_tit">강의실</li>
+									<li class="figure_ico">
+										<img src="/images/front/main/ico_info08.png">
+									</li>
+									<li class="figure_txt">
+										<span id="figure08" class="em">0</span>개(수용인원 860명)
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</section>
+			
+			<section id="main_department">
+				<h1 class="animation fadeInDown">계열안내</h1>
+				<div class="department_text">학점은행제 추계예술대학교 글로벌문화예술교육원 계열안내 정보입니다.</div>
+				<div class="department_inner">
+					<div class="college">
+						<dl>
+							<dt><a href="#">실용음악 계열</a></dt>
+							<dd>
+								<span>보컬</span>
+								<span>싱어송라이터</span>
+								<span>작곡</span>
+								<span>기악</span>
+								<span>음향</span>
+								<span>피아노</span>
+								<span>브라스</span>
+							</dd>
+						</dl>
+					</div>
+					<div class="college">
+						<dl>
+							<dt><a href="#">무용 계열</a></dt>
+							<dd>
+								<span>순수무용</span>
+								<span>스트릿댄스</span>
+								<span>실용무용</span>
+							</dd>
+						</dl>
+					</div>
+					<div class="college">
+						<dl>
+							<dt><a href="#">CCM 계열</a></dt>
+							<dd>
+								<span>워십리더</span>
+								<span>보컬</span>
+								<span>피아노</span>
+								<span>기타</span>
+								<span>베이스</span>
+								<span>드럼</span>
+								<span>작곡</span>
+							</dd>
+						</dl>
+					</div>
+					<div class="college">
+						<dl>
+							<dt><a href="#">문예창작 계열</a></dt>
+							<dd>
+								<span>웹소설</span>
+								<span>영상스토리</span>
+							</dd>
+						</dl>
+					</div>
+					<div class="college">
+						<dl>
+							<dt><a href="#">뮤지컬 계열</a></dt>
+							<dd>
+								<span>연기</span>
+								<span>음악</span>
+								<span>무용</span>
+							</dd>
+						</dl>
+					</div>
+					<div class="college">
+						<dl>
+							<dt><a href="#">모델 계열</a></dt>
+							<dd>
+								<span>모델</span>
+							</dd>
+						</dl>
+					</div>
+					<div class="college">
+						<dl>
+							<dt><a href="#">연기 계열</a></dt>
+							<dd>
+								<span>기획&middot;제작</span>
+								<span>연출</span>
+								<span>시나리오</span>
+								<span>촬영&middot;조명</span>
+								<span>편집&middot;CG효과</span>
+								<span>사운드디자인</span>
+								<span>프로덕션디자인</span>
+								<span>마케팅&middot;배급</span>
+							</dd>
+						</dl>
+					</div>
+					<div class="college">
+						<dl>
+							<dt><a href="#">K-POP 계열</a></dt>
+							<dd>
+								<span>연기</span>
+								<span>방송</span>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</section>
+			
+			<section id="main_gallery">
+				<h1 class="animation fadeInDown">행사 갤러리</h1>
+				<div class="main_gallery_inner">
+					<ul class="list_thumb">
+						<li class="list_thumb_item">
+							<div class="list_thumb_cont">
+								<a href="#" class="thumb_link">
+									<div class="thumb_img">
+										<img src="/images/common/sample_photo.jpg" onerror="javascript:this.src='/images/common/blank_image.png'" alt="">
+									</div>
+								</a>
+								<div class="subject">
+									<div class="subject_click">게시물의 제목영역으로 기본적으로 한줄 말줄임처리 되어 있음.</div>
+									<div class="write_date">2019.05.01</div>
+								</div>
+							</div>
+							<!-- //list_thumb_cont -->
+						</li>
+						<!-- //list_thumb_item -->
+						<li class="list_thumb_item">
+							<div class="list_thumb_cont">
+								<a href="#" class="thumb_link">
+									<span class="ico_play"></span>
+									<div class="thumb_img">
+										<img src="/images/common/sample_photo.jpg" onerror="javascript:this.src='/images/common/blank_image.png'" alt="">
+									</div>
+									
+								</a>
+								<div class="subject">
+									<div class="subject_click">컨텐츠가 동영상 일때는 위의 아이콘이 보여야 한다.</div>
+									<div class="write_date">2019.05.01</div>
+								</div>
+							</div>
+							<!-- //list_thumb_cont -->
+						</li>
+						<!-- //list_thumb_item -->
+						<li class="list_thumb_item">
+							<div class="list_thumb_cont">
+								<a href="#" class="thumb_link">
+									<div class="thumb_img">
+										<img src="/images/common/sample_photo.jpg" onerror="javascript:this.src='/images/common/blank_image.png'" alt="">
+									</div>
+								</a>
+								<div class="subject">
+									<div class="subject_click">게시물의 제목영역으로 기본적으로 한줄 말줄임처리 되어 있음.</div>
+									<div class="write_date">2019.05.01</div>
+								</div>
+							</div>
+							<!-- //list_thumb_cont -->
+						</li>
+						<!-- //list_thumb_item -->
+						<li class="list_thumb_item">
+							<div class="list_thumb_cont">
+								<a href="#" class="thumb_link">
+									<div class="thumb_img">
+										<img src="/images/common/sample_photo.jpg" onerror="javascript:this.src='/images/common/blank_image.png'" alt="">
+									</div>
+								</a>
+								<div class="subject">
+									<div class="subject_click">게시물의 제목영역으로 기본적으로 한줄 말줄임처리 되어 있음.</div>
+									<div class="write_date">2019.05.01</div>
+								</div>
+							</div>
+							<!-- //list_thumb_cont -->
+						</li>
+						<!-- //list_thumb_item -->
+						<li class="list_thumb_item">
+							<div class="list_thumb_cont">
+								<a href="#" class="thumb_link">
+									<div class="thumb_img">
+										<img src="/images/common/sample_photo.jpg" onerror="javascript:this.src='/images/common/blank_image.png'" alt="">
+									</div>
+								</a>
+								<div class="subject">
+									<div class="subject_click">게시물의 제목영역으로 기본적으로 한줄 말줄임처리 되어 있음.</div>
+									<div class="write_date">2019.05.01</div>
+								</div>
+							</div>
+							<!-- //list_thumb_cont -->
+						</li>
+						<!-- //list_thumb_item -->
+						<li class="list_thumb_item">
+							<div class="list_thumb_cont">
+								<a href="#" class="thumb_link">
+									<div class="thumb_img">
+										<img src="/images/common/sample_photo.jpg" onerror="javascript:this.src='/images/common/blank_image.png'" alt="">
+									</div>
+								</a>
+								<div class="subject">
+									<div class="subject_click">게시물의 제목영역으로 기본적으로 한줄 말줄임처리 되어 있음.</div>
+									<div class="write_date">2019.05.01</div>
+								</div>
+							</div>
+							<!-- //list_thumb_cont -->
+						</li>
+						<!-- //list_thumb_item -->
+					</ul>
+					<div class="bt_more"><a href="#" title="전체보기">더보기</a></div>
+				</div>
+				<!-- //main_gallery_inner -->
+			</section>
+			
+			<section id="main_facilities">
+				<h1 class="animation fadeInDown">시설안내</h1>
+				<div class="main_facilities_inner">
+					<div class="main_facilities_txt animation fadeInDown">추계예술대학교 글로벌문화예술교육원은 계열별 실습실 및 학생 편의시설을 갖추고 있습니다.</div>
+					<a href="#" class="bt_link animation fadeInDown" title="시설안내 전체보기"><span>보러가기</span></a>
+				</div>
+			</section>
+			
+			<section id="main_post">
+				<div class="main_post_inner">
+					<div class="post_list">
+						<h1>행사안내</h1>
+						<ul>
+							<li class="post_tit">
+								<div class="subject">
+									<a href="#" class="subject_click"><strong>[실용음악]</strong>리스트 갯수는 4개, 타이틀은 한줄만 보이게, 말줄임 처리 되어 있음</a><span class="ico_new"></span>
+								</div>
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject">
+									<a href="#" class="subject_click"><strong>[CCM]</strong>2020학년도 신입학전형 수시모집 모집요강 안내 </a>
+								</div>
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject">
+									<a href="#" class="subject_click"><strong>[실용음악]</strong>2020학년도 신입학전형 수시모집 모집요강 안내 </a>
+								</div>
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject">
+									<a href="#" class="subject_click"><strong>[무용]</strong>2020학년도 신입학전형 수시모집 모집요강 안내 </a>
+								</div>
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject">
+									<a href="#" class="subject_click"><strong>[뮤지컬]</strong>2020학년도 신입학전형 수시모집 모집요강 안내 </a>
+								</div>
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+							</li>
+						</ul>
+						<div class="bt_more"><a href="#" title="행사안내 전체보기">더보기</a></div>
+					</div>
+					
+					<div class="post_schedule">
+						<h1>학사일정</h1>
+						<ul>
+							<li class="post_tit">
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+								<div class="subject"><a href="#" class="subject_click">리스트 갯수는 4개, 타이틀은 한줄만 보이게, 말줄임 처리 되어 있음<span class="ico_new"></span></a></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+								<div class="subject"><a href="#" class="subject_click">2020학년도 신입학전형 수시모집 모집요강 안내 </a></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+								<div class="subject"><a href="#" class="subject_click">2020학년도 신입학전형 수시모집 모집요강 안내 </a></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+								<div class="subject"><a href="#" class="subject_click">2020학년도 신입학전형 수시모집 모집요강 안내 </a></div>
+							</li>
+							<li class="post_tit">
+								<div class="subject_info"><span class="write_date">2019-05-00</span></div>
+								<div class="subject"><a href="#" class="subject_click">2020학년도 신입학전형 수시모집 모집요강 안내 </a></div>
+							</li>
+						</ul>
+						<div class="bt_more"><a href="#" title="학사일정 전체보기">더보기</a></div>
+					</div>
+					
+					<div class="application animation fadeInRight">
+						<ul class="application_inner">
+							<li class="txt1">Contact</li>
+							<li class="txt2">평일 am 9시 ~ pm 5시</li>
+							<li class="txt4">02-3147-1130</li>
+							<li><a href="#" class="bt_link" title="원서접수 이동"><span>원서접수</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- //main_container -->
+		
+		<aside>
+			<div class="main_section">
+				<ul id="navigation">
+					<li><a href="#container" title="처음으로 이동"><span class="rightbar-bullet-txt">홈</span></a></li>
+					<li><a href="#main_about" title="교육원소개 이동"><span class="rightbar-bullet-txt">교육원소개</span></a></li>
+					<li><a href="#main_department" title="계열안내로 이동"><span class="rightbar-bullet-txt">계열안내</span></a></li>
+					<li><a href="#main_gallery" title="행사갤러리로 이동"><span class="rightbar-bullet-txt">행사갤러리</span></a></li>
+					<li><a href="#main_facilities" title="시설안내로 이동"><span class="rightbar-bullet-txt">시설안내</span></a></li>
+					<li><a href="#main_post" title="시설안내로 이동"><span class="rightbar-bullet-txt">행사안내</span></a></li>
+				</ul>
+			</div>
+			<div id="floatMenu">
+				<button type="button" class="bt_apply animate-element pulse">원서접수</button>
+				<button type="button" class="bt_gotop">TOP</button>
+			</div>
+		</aside>
+	</div>
+	<!-- // container -->
+	
+	<footer id="footer">
+		<div class="footer_inner trans400">
+			<div class="link">
+				<ul class="link_area">
+					<li><a href="http://www.chugye.ac.kr/mbs/university/subview.jsp?id=university_080201000000" target="_blank" title="새창으로 이동">개인정보처리방침</a></li>
+					<li><a href="https://www.chugye.ac.kr/mbs/university/jsp/board/list.jsp?boardId=545845&id=university_080500000000" target="_blank" title="새창으로 이동">개인정보공시</a></li>
+					<li><a href="http://www.chugye.ac.kr/mbs/university/subview.jsp?id=university_080301000000" target="_blank" title="새창으로 이동">이메일무단수집거부</a></li>
+					<li><a href="#" title="새창으로 이동">로그인</a></li>
+					<li><a href="#container" title="위로이동" class="bt_top"><img src="/images/front/common/bt_gotop.png" alt=""></a></li>
+				</ul>
+			</div>
+			<div class="foot_cont">
+				<ul class="address">
+					<li>03762 서울특별시 서대문구 북아현로 11가 길7</li>
+					<li class="inline"><span>TEL : 080-900-1255</span><span>FAX : 02-392-1777</span></li>
+					<li class="copyright">Copyright 2019 <em>CHUGYE UNIVERSITY FOR THE ARTS</em> All Right Reserved.</li>
+				</ul>
+				<div class="foot_logo"><img src="/images/front/common/foot_logo.png" alt="추계예술대학교 글로벌문화예술교육원"></div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

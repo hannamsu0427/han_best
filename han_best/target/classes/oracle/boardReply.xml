@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="boardReply">
+
+	<typeAlias alias="boardReply" type="com.itsp.vo.BoardVO" />
+	
+	<resultMap id="Map" class="boardRecord">
+		<result property="recordSeq" column="RECORD_SEQ" />
+		<result property="seq" column="SEQ" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		<result property="regDate" column="REG_DATE" />
+		<result property="regId" column="REG_ID" />
+		<result property="regName" column="REG_NAME" />
+	</resultMap>	
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM I_BOARD_RECORD_REPLY
+		WHERE 1=1
+		AND RECORD_SEQ = #recordSeq#
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM I_BOARD_RECORD_REPLY 
+		WHERE 1=1 
+		AND RECORD_SEQ = #recordSeq#
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_BOARD_RECORD_REPLY WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_BOARD_RECORD_REPLY SET
+					CONTENTS = <![CDATA[ #contents#]]>,
+					MOD_DATE = SYSDATE,
+					MOD_ID = #modId#,
+					MOD_IP = #modIp#
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_BOARD_RECORD_REPLY (
+					RECORD_SEQ,
+					SEQ,
+					CONTENTS,
+					REG_ID,
+					REG_NAME,
+					REG_IP
+				) VALUES(
+					#recordSeq#,
+					I_SEQ,
+					#contents#,
+					#regId#,
+					#regName#,
+					#regIp#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_BOARD_RECORD_REPLY WHERE SEQ = #seq#
+	</delete>
+
+
+</sqlMap>

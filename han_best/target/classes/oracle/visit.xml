@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="visit">
+
+	<typeAlias alias="visit" type="com.itsp.vo.VisitVO" />
+
+	<resultMap id="mapForList" class="visit">
+		<result property="seq" column="SEQ" />
+		<result property="regIp" column="REG_IP" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="regYear" column="REG_YEAR" />
+		<result property="regMonth" column="REG_MONTH" />
+		<result property="regDay" column="REG_DAY" />
+		<result property="regTime" column="REG_TIME" />
+		<result property="regReference" column="REG_REFERENCE" />
+		<result property="regAgent" column="REG_AGENT" />
+		<result property="regBrowser"	column="REG_BROWSER" />	
+		<result property="regOs" column="REG_OS" />
+	</resultMap>
+
+	<resultMap id="map" class="visit">
+		<result property="seq" column="SEQ" />
+		<result property="regIp" column="REG_IP" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="regYear" column="REG_YEAR" />
+		<result property="regMonth" column="REG_MONTH" />
+		<result property="regDay" column="REG_DAY" />
+		<result property="regTime" column="REG_TIME" />
+		<result property="regReference" column="REG_REFERENCE" />
+		<result property="regAgent" column="REG_AGENT" />
+		<result property="regBrowser"	column="REG_BROWSER" />	
+		<result property="regOs" column="REG_OS" />
+	</resultMap>
+	
+	<resultMap id="mapForYearList" class="visit">
+		<result property="regYear" column="REG_YEAR" />
+		<result property="regCount" column="REG_COUNT" />
+	</resultMap>
+	
+	<resultMap id="mapForMonthList" class="visit">
+		<result property="january" column="JANUARY" />
+		<result property="february" column="FEBRUARY" />
+		<result property="march" column="MARCH" />
+		<result property="april" column="APRIL" />
+		<result property="may" column="MAY" />
+		<result property="june" column="JUNE" />
+		<result property="july" column="JULY" />
+		<result property="august" column="AUGUST" />
+		<result property="september" column="SEPTEMBER" />
+		<result property="october" column="OCTOBER" />
+		<result property="november" column="NOVEMBER" />
+		<result property="december" column="DECEMBER" />
+	</resultMap>
+		
+	<insert id="insertDataProc">
+		INSERT INTO I_VISIT_RECORD (
+			SEQ,
+			REG_IP,
+			REG_YEAR,
+			REG_MONTH,
+			REG_DAY,
+			REG_TIME,
+			REG_AGENT,
+			REG_OS
+		) VALUES(
+			IWORK_SEQUENCE.NEXTVAL ,
+			#regIp#,
+			#regYear#,
+			#regMonth#,
+			#regDay#,
+			#regTime#,
+			#regAgent#,
+			#regOs#
+		)
+	</insert>
+	
+	<select id="selectDataList" resultMap="mapForList">
+		SELECT 
+			SEQ,
+			REG_IP,
+			REG_DATE,
+			REG_YEAR,
+			REG_MONTH,
+			REG_DAY,
+			REG_TIME,
+			REG_REFERENCE,
+			REG_AGENT,
+			REG_BROWSER,
+			REG_OS
+		FROM I_VISIT_RECORD
+		WHERE 1=1 
+		<isNotEmpty prepend="AND" property="regYear">
+			REG_YEAR = #regYear#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="regDay">
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') = #regDay#
+		</isNotEmpty>
+		ORDER BY REG_DATE DESC
+	</select>
+	
+	<select id="selectData" resultMap="map">
+		SELECT * FROM I_VISIT_RECORD
+		WHERE SEQ = #seq#
+	</select>
+	
+	<select id="totalCount" resultClass="int">
+		SELECT COUNT(*)
+		FROM I_VISIT_RECORD
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="regYear">
+			REG_YEAR = #regYear#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="toDay">
+			to_char(SYSDATE, 'YYYY-MM-DD') = to_char(REG_DATE, 'YYYY-MM-DD')
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectVisitListData" resultMap="mapForYearList">
+		SELECT 
+			REG_YEAR, 
+			COUNT(*) AS REG_COUNT
+		FROM I_VISIT_RECORD
+		WHERE 1=1
+		GROUP BY REG_YEAR
+		ORDER BY REG_YEAR DESC
+	</select>
+	
+	<select id="selectVisitListMonthData" resultMap="mapForMonthList">
+	SELECT
+		SUM("01") AS JANUARY, 
+		SUM("02") AS FEBRUARY, 
+		SUM("03") AS MARCH, 
+		SUM("04") AS APRIL,
+		SUM("05") AS MAY, 
+		SUM("06") AS JUNE, 
+		SUM("07") AS JULY, 
+		SUM("08") AS AUGUST, 
+		SUM("09") AS SEPTEMBER, 
+		SUM("10") AS OCTOBER, 
+		SUM("11") AS NOVEMBER, 
+		SUM("12") AS DECEMBER
+	FROM(
+		SELECT
+			DECODE(REG_MONTH, '1', REG_COUNT, 0) AS "01",
+			DECODE(REG_MONTH, '2', REG_COUNT, 0) AS "02",
+			DECODE(REG_MONTH, '3', REG_COUNT, 0) AS "03",
+			DECODE(REG_MONTH, '4', REG_COUNT, 0) AS "04",
+			DECODE(REG_MONTH, '5', REG_COUNT, 0) AS "05",
+			DECODE(REG_MONTH, '6', REG_COUNT, 0) AS "06",
+			DECODE(REG_MONTH, '7', REG_COUNT, 0) AS "07",
+			DECODE(REG_MONTH, '8', REG_COUNT, 0) AS "08",
+			DECODE(REG_MONTH, '9', REG_COUNT, 0) AS "09",
+			DECODE(REG_MONTH, '10', REG_COUNT, 0) AS "10",
+			DECODE(REG_MONTH, '11', REG_COUNT, 0) AS "11",
+			DECODE(REG_MONTH, '12', REG_COUNT, 0) AS "12"
+		FROM(
+			SELECT 
+				REG_MONTH, 
+				COUNT(*) AS REG_COUNT 
+			FROM I_VISIT_RECORD
+				WHERE UPPER(SITE_ID) = UPPER(#siteId#) AND REG_YEAR = #regYear#
+				GROUP BY REG_MONTH
+				ORDER BY REG_MONTH
+		)
+	)
+	</select>
+</sqlMap>

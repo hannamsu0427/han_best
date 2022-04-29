@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="facilityRecord">
+
+	<typeAlias alias="facilityRecord" type="com.itsp.vo.FacilityVO" />
+	
+	<resultMap id="Map" class="facilityRecord">
+		<result property="configSeq" column="CONFIG_SEQ" />
+		<result property="configName" column="CONFIG_NAME" />
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="explanation" column="EXPLANATION" />	
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		<result property="regIp" column="REG_IP" />
+		<result property="regId" column="REG_ID" />
+		<result property="regName" column="REG_NAME" />
+		<result property="orderNum" column="ORDER_NUM" />
+	</resultMap>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_FACILITY_RECORD
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="configSeq">
+			CONFIG_SEQ = #configSeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectListData" resultMap="Map">
+		SELECT
+			CONFIG_SEQ,
+			(SELECT TITLE FROM I_FACILITY_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+			SEQ,
+			TITLE,
+			EXPLANATION,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+			REG_IP,
+			REG_ID,
+			REG_NAME,
+			ORDER_NUM
+		FROM I_FACILITY_RECORD X
+		WHERE 1=1 
+		AND CONFIG_SEQ = #configSeq#
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		ORDER BY ORDER_NUM ASC, SEQ DESC
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT
+			CONFIG_SEQ,
+			(SELECT TITLE FROM I_FACILITY_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+			SEQ,
+			TITLE,
+			EXPLANATION,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+			REG_IP,
+			REG_ID,
+			REG_NAME,
+			ORDER_NUM
+		FROM I_FACILITY_RECORD X
+		WHERE 1=1
+		AND CONFIG_SEQ = #configSeq#
+		AND SEQ= #seq#
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_FACILITY_RECORD WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_FACILITY_RECORD SET
+					TITLE = <![CDATA[ #title#]]>,
+					EXPLANATION = <![CDATA[ #explanation#]]>,
+					USE_YN = <![CDATA[ #useYn#]]>,
+					MOD_DATE = SYSDATE,
+					MOD_ID = #modId#,
+					MOD_IP = #modIp#
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_FACILITY_RECORD (
+					CONFIG_SEQ,
+					SEQ,
+					TITLE,
+					EXPLANATION,
+					USE_YN,
+					REG_ID,
+					REG_NAME,
+					REG_IP,
+					ORDER_NUM
+				) VALUES(
+					#configSeq#,
+					I_SEQ,
+					#title#,
+					#explanation#,
+					#useYn#,
+					#regId#,
+					#regName#,
+					#regIp#,
+					#orderNum#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<update id="orderNumProc">
+		UPDATE I_FACILITY_RECORD SET
+			ORDER_NUM = #orderNum#,
+			MOD_DATE = SYSDATE
+		WHERE SEQ = #seq#
+	</update>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_FACILITY_RECORD WHERE SEQ = #seq#
+	</delete>
+
+</sqlMap>

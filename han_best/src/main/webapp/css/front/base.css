@@ -1,0 +1,86 @@
+@charset "utf-8";
+
+/* reset */
+*{margin:0;padding:0;-webkit-box-sizing: border-box;box-sizing:border-box;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
+html {font-size:10px;-webkit-tap-highlight-color: transparent;overflow:auto;}
+html, body{height:100%;margin:0;padding:0;word-break:keep-all;}
+body, div, p, table, thead, tfoot, tbody, tr, th, td, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, fieldset, address, span, img, strong, b, em, i{margin:0;padding:0;border:0;-webkit-text-size-adjust:none;}
+fieldset,img {border:0 none; vertical-align:top}
+dl,ul,ol,menu,li {list-style:none}
+blockquote, q {quotes: none}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none}
+button,input,optgroup,select,textarea {color:inherit;font-size:inherit;font-family: inherit;margin:0}
+button{overflow:visible;display:inline-block;margin:0;padding:0;background-color:transparent;cursor:pointer;}
+button,select {text-transform: none}
+button[disabled],html input[disabled] {cursor: default}
+button::-moz-focus-inner,input::-moz-focus-inner {border:0;padding:0}
+button,html input[type="button"],input[type="reset"],input[type="submit"],input[type="image"] { -webkit-appearance: button; cursor: pointer;outline:0; }
+button:focus {border:1px dotted #000;}
+input[type="text"],input[type="number"], input[type="password"], input[type="date"], input[type="file"] {box-sizing:border-box;height:26px;padding:1px 5px 0 5px;border:1px solid #bfbfbf;}
+input[type="file"] {box-sizing:border-box;border:1px solid #afafaf;height:40px; outline-style:none;background-color:#fff;padding:1px !important;cursor: pointer;}
+input[type=file]::-ms-browse {border:none !important;box-shadow: 0 0 0px 0 #f0f0f0 inset !important;}
+input[type="file"]::-webkit-file-upload-button {height:36px;vertical-align:top;font-size:1.5rem;}
+input[type="checkbox"],input[type="radio"] {box-sizing:border-box;padding:0;margin:0;}
+input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button	{height: auto}
+input[type="search"] {-webkit-appearance: textfield;box-sizing: content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration	{-webkit-appearance: none}
+textarea {overflow: auto; border:1px solid #bfbfbf;padding:3px;-webkit-appearance: none; -webkit-border-radius: 0;}
+optgroup {font-weight: bold}
+select{height:26px;padding:3px;border:1px solid #bfbfbf;}
+label {cursor:pointer}
+
+body {font-family:"NanumSquare","Malgun Gothic","맑은 고딕", Dotum, "돋움", Gullim, "굴림", Tahoma, "Microsoft Sans Serif", sans-serif;font-size:87.5%;font-style:normal;line-height:1.428571429;color:#555; -webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; -ms-text-size-adjust: 100%;letter-spacing: -0.5px;word-break:keep-all;word-wrap:normal;}
+input[type="radio"], input[type="checkbox"]{width:14px; height:14px;}
+a {color:inherit;text-decoration:none}
+a:active, a:hover {color:inherit;text-decoration:none;}
+a[href^="javascript:"]:after,
+a[href^="#"]:after {content:"";}
+address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
+table {border-collapse:collapse;border-spacing:0;}
+h1,h2,h3,h4,h5{color:#000;}
+legend,.blind, .screen_out {overflow:hidden;position:absolute;top:0;left:0;width:0px;height:0px;font-size:0px;line-height:0;} /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를 제공할때 */
+caption {overflow:hidden;top:0;left:0;width:0px;height:0px;font-size:0px;line-height:0;} 
+small,.small {font-size: 85%}
+ul,ol {margin-top: 0;margin-bottom: 0}
+ul ul,ul ol,ol ul,ol ol {margin-bottom: 0}
+.text-lowercase {text-transform: lowercase}
+.text-uppercase,.initialism {text-transform: uppercase}
+.text-capitalize {text-transform: capitalize}
+/* global */
+#u_skip{position:relative;z-index:2147483647}
+#u_skip a{position:absolute;top:-50px;left:0;width:150px;border:1px solid #f48729;background:#000;text-align:center;outline:none}/* Skip Navigation */
+#u_skip a:active,#u_skip a:focus{top:0;text-decoration:none;cursor:pointer;zoom:1}
+#u_skip span{display:inline-block;padding:4px 0 6px 0;font-size:13px;color:#fff;letter-spacing:-0.05em;font-weight:400;}
+.ir_pm {display:block;overflow:hidden;font-size:0px;line-height:0;text-indent:-9999px} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir_wa {display:block;overflow:hidden;position:relative;z-index:-10;width:100%;height:100%} /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스트를 보여주고자 할때 */
+.pointer { cursor:pointer; _cursor /**/:hand }
+
+/**** Input Selector ****/
+input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
+html input[disabled] {cursor:default; background-color:#fff; border:1px solid #bfbfbf !important}
+html input[enabled] {background:#f9f9f9; border:1px solid #bfbfbf !important}
+html input[readonly] {cursor:default; background-color:#f9f9f9 !important;}
+html input[required] {background-color:#e6e6e6 !important; }
+html input.disabled {cursor:default; background-color:#f9f9f9; border:1px solid #bfbfbf !important}
+html input.required {background-color:#e6e6e6 !important;}
+html input[disabled]:focus, html input.disabled:focus {border:1px solid #bfbfbf !important; background-color:#f9f9f9 !important;}
+html input[readonly]:focus, html input.readonly:focus {background-color:#f9f9f9 !important;}
+.disabled { opacity: .70; }
+::-webkit-input-placeholder {color:rgba(0,0,0,0.5);}
+::-moz-placeholder {color:rgba(0,0,0,0.5);}
+:-moz-placeholder {color:rgba(0,0,0,0.5);} /* firefox 19+ */
+:-ms-input-placeholder {color:rgba(0,0,0,0.5);} /* ie */
+input:-moz-placeholder {color:rgba(0,0,0,0.5);}
+#map-convas { }
+#map-canvas img { max-width: none !important; }
+/*Loading*/
+#loading {display:none; position:absolute;top:50%;left:50%;margin-top:-16px;width:32px;z-index:100;}
+#loading img {width:32px; height:32px;}
+/*Loading*/
+.popupMask {position:fixed;top:0;left:0;width:100%;height:100%; background-color: rgba(127,127,127,0.5); z-index:9000;display:none;}
+/* -- For Print -- */
+@media print {
+	body { margin: 0; background-color: #fff; }
+	#header, #footer {display:none;}
+	.sub_contents {display:block;width:100%;}
+}

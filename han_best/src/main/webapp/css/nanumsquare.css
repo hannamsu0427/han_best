@@ -1,0 +1,60 @@
+/* 
+ * Nanum Square Web Fonts
+ * Copyright (c) 2010, NAVER Corporation (http://www.nhncorp.com) 
+ */
+ 
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: normal;
+  font-weight: 300;
+  src: url(/css/fonts/NanumSquareL.eot);
+  src: local('NanumSquare Light'),
+       local('NanumSquareL'),
+       url(/css/fonts/NanumSquareL.eot?#iefix) format('embedded-opentype'),
+       url(/css/fonts/NanumSquareL.woff2) format('woff2'),
+       url(/css/fonts/NanumSquareL.woff) format('woff'),
+       url(/css/fonts/NanumSquareL.ttf) format('truetype');
+  src:local(『), url(/css/fonts/NanumSquareL.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/css/fonts/NanumSquareR.eot);
+  src: local('NanumSquare Regular'),
+       local('NanumSquareR'),
+       url(/css/fonts/NanumSquareR.eot?#iefix) format('embedded-opentype'),
+       url(/css/fonts/NanumSquareR.woff2) format('woff2'),
+       url(/css/fonts/NanumSquareR.woff) format('woff'),
+       url(/css/fonts/NanumSquareR.ttf) format('truetype');
+  src:local(『), url(/css/fonts/NanumSquareR.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: normal;
+  font-weight: 700;
+  src: url(/css/fonts/NanumSquareB.eot);
+  src: local('NanumSquare Bold'),
+       local('NanumSquareB'),
+       url(/css/fonts/NanumSquareB.eot?#iefix) format('embedded-opentype'),
+       url(/css/fonts/NanumSquareB.woff2) format('woff2'),
+       url(/css/fonts/NanumSquareB.woff) format('woff'),
+       url(/css/fonts/NanumSquareB.ttf) format('truetype');
+  src:local(『), url(/css/fonts/NanumSquareB.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: normal;
+  font-weight: 800;
+  src: url(/css/fonts/NanumSquareEB.eot);
+  src: local('NanumSquare ExtraBold'),
+       local('NanumSquareEB'),
+       url(/css/fonts/NanumSquareEB.eot?#iefix) format('embedded-opentype'),
+       url(/css/fonts/NanumSquareEB.woff2) format('woff2'),
+       url(/css/fonts/NanumSquareEB.woff) format('woff'),
+       url(/css/fonts/NanumSquareEB.ttf) format('truetype');
+  src:local(『), url(/css/fonts/NanumSquareEB.woff) format('woff');
+}

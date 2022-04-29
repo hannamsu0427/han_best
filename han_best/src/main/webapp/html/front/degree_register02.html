@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="X-UA-TextLayoutMetrics" content="gdi">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="apple-mobile-web-app-title" content="글로벌문화예술교육원">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+<meta name="HandheldFriendly" content="true">
+<meta name="Title" content="글로벌문화예술교육원" >
+<meta name="Description" content="글로벌문화예술교육원 교육원소개,계열안내,일반과정,학사안내">
+<meta name="Keywords" content="글로벌문화예술교육원 교육원소개,계열안내,일반과정,학사안내">
+<meta name="Robots" content="INDEX,FOLLOW">
+<meta property="og:url" content="https://www.cgc.ac.kr">
+<meta property="og:type" content="website" >
+<meta property="og:title" content="글로벌문화예술교육원">
+<meta property="og:description" content="글로벌문화예술교육원 교육원소개,계열안내,일반과정,학사안내">
+<meta property="og:image" content="https://www.chugye.ac.kr/images/common/h1_logo.png">
+
+<title>글로벌문화예술교육원</title>
+<!-- 
+<link rel="shortcut icon" type="image/x-icon" href="https://www.chugye.ac.kr/images/common/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.chugye.ac.kr/images/common/favicon.png">
+<link rel="apple-touch-startup-image" type="image/png" sizes="32x32" href="https://www.chugye.ac.kr/images/common/touch_startup.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://www.chugye.ac.kr/images/common/touch_icon.png">
+ -->
+<link href="/css/front/style.css" rel="stylesheet" type="text/css">
+<link href="/css/front/sub.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/common/js/jQuery/jquery-1.9.0.min.js"></script>
+
+<script type="text/javascript">
+	var floatPosition = parseInt($("#floatMenu").css('top'));
+		$(window).scroll(function() {
+			var scrollTop = $(window).scrollTop();	
+			 if(0 < scrollTop){
+				$("#header").css("background-color", "rgba(0, 0, 0, 0.7)");
+			}else{
+				$("#header").css("background-color", "rgba(0, 0, 0, 0)");
+			}
+			
+			var newPosition = scrollTop + floatPosition + "px";
+			$("#floatMenu").stop().animate({
+				"top" : newPosition
+			}, 500);
+		
+		}).scroll();
+</script>
+
+<!-- min-width:993에서 사용 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#nav').bind({
+			"mouseenter focusin": function() {		
+				$(".gnb_inner > .nav > ul> li > div").css("display","block");
+				$(".gnb_inner > .nav > ul> li > a").css("color","#000");
+				$(".nav").addClass("white");
+				$(".header_inner_pc > h1 > a").css({ 'background' : 'url(/images/front/common/h1_logo_on.png) no-repeat 0 50%','background-size' : '100% 32px'});
+				$(".header_inner_pc > .graduate > a").css({ 'background' : 'url(/images/front/common/graduate_on.png) no-repeat'});
+				$(".hidden_popup_top > .bt_popup > .open").css({ 'color' : '#f48729','background' : 'url(/images/front/common/bt_ico_popup_on.png) no-repeat 100% 50%'});
+			},
+			"mouseleave focusout": function() { 
+				$(".gnb_inner > .nav > ul > li > div").css("display","none");
+				$(".gnb_inner > .nav > ul> li > a").css("color","#fff");
+				$(".nav").removeClass("white");
+				$(".header_inner_pc > h1 > a").css({ 'background' : 'url(/images/front/common/h1_logo.png) no-repeat 0 50%','background-size' : '100% 32px'});
+				$(".header_inner_pc > .graduate > a").css({ 'background' : 'url(/images/front/common/graduate.png) no-repeat'});
+				$(".hidden_popup_top > .bt_popup > .open").css({ 'color' : '#ffffff', 'opacity' : '0.5','background' : 'url(/images/front/common/bt_ico_popup_on.png) no-repeat 100% 50%'});
+			}
+		});
+	});
+</script>
+
+</head>
+
+<body>
+	<div id="u_skip">
+		<a href="#" onClick="document.getElementById('header').tabIndex = -1;document.getElementById('nav').focus();return false;"><span>메뉴 바로가기</span></a> 
+		<a href="#" onClick="document.getElementById('container').tabIndex = -1;document.getElementById('container').focus();return false;"><span>컨텐츠 바로가기</span></a> 
+		<a href="#" onClick="document.getElementById('footer').tabIndex = -1;document.getElementById('footer').focus();return false;"><span>연락처 바로가기</span></a>
+	</div>	
+	
+	<div id="hidden_popup">
+		<div class="hidden_popup_top">
+			<div class="bt_popup"><a href="#" title="팝업창 열기" class="open">POP UP</a></div>
+		</div>
+		<div class="hidden_popup_wrap open"><!-- display:none 기본값, open 클래스로 활성화 -->
+			<div class="hidden_inner">
+				<div class="hidden_popup_list">
+					<div id="color01" class="popup_conts">
+						<ul>
+							<li class="txt_head"><span class="txt_field">[추계 재담 웹툰아카데미]  페이스북 페이지 팔로우 이벤트! </span></li>
+							<li class="txt_year"><span class="txt_field">2019년 7월 1일(월)~ 2019년 7월 31일(수)까지</span></li>
+						</ul>
+						<a href="#" title="페이지 이동" class="txt_link"><span>바로 가기</span></a>
+					</div>
+					<div id="color02" class="popup_conts">
+						<ul>
+							<li class="txt_head"><span class="txt_field">[추계 재담 웹툰아카데미]  페이스북 페이지 팔로우 이벤트! </span></li>
+							<li class="txt_year"><span class="txt_field">2019년 7월 1일(월)~ 2019년 7월 31일(수)까지</span></li>
+						</ul>
+						<a href="#" title="페이지 이동" class="txt_link"><span>바로 가기</span></a>
+					</div>
+				</div>
+				<div class="popup_bottom_pc">
+					<div class="oneday"><input type="checkbox" id="oneday" name=""><label for="oneday" class="pl10">오늘하루 이창을 열지 않겠습니다.</label></div>
+					<div class="bt_popup"><a href="#" title="팝업창 닫기" class="close">POP UP</a></div>
+				</div>
+				<div class="popup_bottom_mobile">
+					<ul>
+						<li><a href="#" title="오늘하루 닫기" class="close">오늘하루 닫기</a></li>
+						<li><a href="#" title="팝업창 닫기" class="close">닫기</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- // hidden_inner -->
+		</div>
+		<!-- // hidden_popup_wrap -->
+	</div>
+	<!-- // hidden_popup -->
+	
+	<div id="header" class="animation fadeInDown">
+		<div class="header_inner">
+			<div class="header_inner_mobile">
+				<h1 class="h1_logo"><a href="#">글로벌문화예술교육원</a></h1>
+				<div class="bt_group">
+					<div class="bt_popup"><a href="#" title="팝업열기">팝업열기</a></div>
+					<div class="bt_nav_open trans300"><a href="#" title="팝업열기">전체메뉴 열기</a></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="gnb">
+			<div id="gnb_mobile" class="gnb_mobile"><!-- display:none 기본값, on 클래스로 활성화 -->
+				<div class="gnb_mobile_header">
+					<h1 class="h1_logo"><a href="#">글로벌문화예술교육원</a></h1>
+					<div class="bt_group">
+						<div class="bt_popup"><a href="#" title="팝업열기">팝업열기</a></div>
+						<div class="bt_nav_open"><a href="#" title="팝업열기">전체메뉴 열기</a></div>
+					</div>
+				</div>
+				<div class="gnb_inner" id="nav">
+					<div class="header_inner_pc">
+						<h1 class="h1_logo"><a href="#">글로벌문화예술교육원</a></h1>
+						<div class="graduate"><a href="#">학점은행제 학사학위과정 평가인정 훈련기관</a></div>
+					</div>
+					<div class="nav">
+						<ul class="gnb_depth1">
+							<li><a href="#"><span>교육원소개</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>교육원 소개</span></a></li>
+										<li><a href="#"><span>인사말</span></a></li>
+										<li><a href="#"><span>연혁</span></a></li>
+										<li><a href="#"><span>오시는 길</span></a></li>
+										<li><a href="#"><span>시설안내</span></a></li>
+										<li><a href="#"><span>공시정보</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>입학안내</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>모집일정요강</span></a></li>
+										<li><a href="#"><span>원서접수</span></a></li>
+										<li><a href="#"><span>원서접수확인</span></a></li>
+										<li><a href="#"><span>합격안내</span></a></li>
+										<li><a href="#"><span>브로슈어보기</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>계열안내</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>실용음악계열</span></a></li>
+										<li><a href="#"><span>무용계열</span></a></li>
+										<li><a href="#"><span>CCM계열</span></a></li>
+										<li><a href="#"><span>문예창작계열</span></a></li>
+										<li><a href="#"><span>뮤지컬계열</span></a></li>
+										<li><a href="#"><span>모델계열</span></a></li>
+										<li><a href="#"><span>연기계열</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>일반과정</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>웹튠아카데미</span></a></li>
+										<li><a href="#"><span>K-POP계열</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>학사안내</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>학점은행제</span></a></li>
+										<li><a href="#"><span>개설과목</span></a></li>
+										<li><a href="#"><span>등록안내</span></a></li>
+										<li><a href="#"><span>장학금안내</span></a></li>
+										<li><a href="#"><span>수강신청</span></a></li>
+										<li><a href="#"><span>학사일정</span></a></li>
+										<li><a href="#"><span>학사시스템</span></a></li>
+										<li><a href="#"><span>증명서발급</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="#"><span>정보광장</span></a>
+								<div class="gnb_div">
+									<ul class="gnb_depth2">
+										<li><a href="#"><span>공지사항</span></a></li>
+										<li><a href="#"><span>학사및규정</span></a></li>
+										<li><a href="#"><span>행사안내</span></a></li>
+										<li><a href="#"><span>활동내역</span></a></li>
+										<li><a href="#"><span>이벤트</span></a></li>
+										<li><a href="#"><span>Q&amp;A</span></a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!-- //header -->
+	
+	<div id="container">
+		<div class="sub_container">
+			<section>
+				<article>
+					<div class="page_header visual05">
+						<div class="page_header_inner">
+							<ul class="location">
+								<li>Home</li>
+								<li>학사안내</li>
+								<li class="here">수강신청</li>
+							</ul>
+							<h2 class="gnb_depth1_tit">수강신청</h2>
+						</div>
+						
+					</div>
+				</article>
+				
+				<article class="page_conts">
+					<div class="page_conts_tit">
+						<h3>수강신청</h3>
+					</div>
+					
+					<div class="post_tabs">
+						<ul class="half">
+							<li><a href="#tab01"><span>수강신청방법</span></a></li>
+							<li class="active"><a href="#tab02"><span>수강료납부 및 환불</span></a></li>
+						</ul>
+					</div>
+					<!-- // post_tabs -->
+					
+					<div class="degree_register" id="tab02">
+						<div class="confirm_box">
+							<div class="box_inner">
+								<div class="check_icon"><span class="ico_bank"></span></div>
+								<div class="check_txt"><strong class="fc0">수강료납부계좌</strong></div>
+								<div class="check_bank">
+									<dl>
+										<dt>은행명</dt>
+										<dd>농협</dd>
+									</dl>
+									<dl>
+										<dt>계좌번호</dt>
+										<dd>317-0006-3222-71</dd>
+									</dl>
+									<dl>
+										<dt>입금주</dt>
+										<dd>추계예술대학교</dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+						<!-- // confirm_box -->
+						
+						<h4>환불규정</h4>
+						<div class="enroll_inner">
+							<div class="register_refund">
+								<div class="tr">[2018.08.19. 일부개정] </div>
+								<div class="amend">
+									<strong>제1조 (명칭)</strong>
+									<p>본 규정은 추계예술대학교 글로벌문화예술교육원(이하 “본원” 이라 한다.) 학습과정 취소 및 학습비 반환규정이라 칭한다.</p>
+								</div>
+								<div class="amend">
+									<strong>제2조 (목적)</strong>
+									<p>반환에 관한 사항을 규정함으로써 학습자권리에 대한 보호와 본원 운영의 효율성을 제고한다.</p>
+								</div>
+								<div class="amend">
+									<strong>제3조 (학습과정 취소)</strong>
+									<p>① 본원 학습자는 다음 각 호의 어느 하나에 해당하는 경우 제2항 제출서류에 의하여 수강포기를 할 수 있으며, 처리일자는 출원일자로 한다.</p>
+									<ol class="order_num">
+										<li>학습자가 「병역법」에 따른 병역 의무를 이행하기 위하여 군에 입대하는 경우 등 법령에 의하여 학습을 계속할 수 없는 경우 : 입대확인서 첨부</li>
+										<li>학습자가 학습 포기의 의사를 표시한 경우</li>
+										<li>학습자가 본인의 질병 &middot; 사망 또는 천재지변이나 그 밖의 부득이한 사유로 학습을 시작하지 아니하거나 학업을 계속하지 못하게 된 경우 : 진단 &middot; 확인서 
+									또는 그 밖의 부득이한 사유에 대한 증빙서 첨부</li>
+									</ol>
+									<p>② 학습과정 취소시 다음 서류를 제출하여야 한다.</p>
+									<ol class="order_num">
+										<li>수강포기원</li>
+										<li>보호자 증빙서류</li>
+										<li>보호자 통장사본 1부</li>
+									</ol>
+									<p>③ 제1항에도 불구하고, 다음 각 호의 1에 해당하는 경우에는 학습과정 취소 대상에서 제외한다. &#60;개정 2018.09.14.&#62;</p>
+									<ol class="order_num">
+										<li>학습과정별 총 수업시간의 1/2이상을 수강한 학습자</li>
+										<li>징계에 의한 정학, 퇴학등의 사유</li>
+									</ol>
+								</div>
+								<div class="amend">
+									<strong>제4조 (학습비 반환)</strong>
+									<p>학습과정 취소에 따른 학습비 반환은 각 호에 의하며, 제3조제2항의 서류 접수 후, 근무일 5일 이내에 학습비를 반환함을 원칙으로 한다. &#60;개정 2018.09.14.&#62;</p>
+									<ol class="order_num">
+										<li>평가인정 학습과정의 학습비 :「평가인정학습과정 운영에 관한 규정」에 따라 반환.</li>
+										<li>일반과정 학습비 : 평생교육법시행령 제23조에 따라 반환.</li>
+									</ol>
+								</div>
+								<div class="amend">
+									<strong>제5조 (규정변경 및 공포)</strong>
+									<p>학습비 반환규정의 변경 및 공포는 운영위원회에서 심의한다.</p>
+								</div>
+								<div class="amend">
+									<ul class="tc">
+										<li class="amend"><strong>부칙</strong><br>①(시행일) 본 규정은 2009년 1월 29일부터 시행한다.</li>
+										<li class="amend"><strong>부칙</strong><br>①(시행일) 본 규정은 2009년 3월 1일부터 변경 시행한다.</li>
+										<li class="amend"><strong>부칙</strong><br>①(시행일) 본 규정은 2016년 3월 1일부터 변경 시행한다.</li>
+										<li class="amend"><strong>부칙</strong><br>①(시행일) 본 규정은 2018년 9월 14일부터 변경 시행한다.</li>
+										<li class="amend"><strong>부칙</strong><br>①(시행일) 본 규정은 2019년 8월 19일부터 변경 시행한다.</li>
+									</ul>
+								</div>
+							</div>
+							<!-- // register_refund -->
+						</div>
+						<!-- //enroll_inner -->
+					</div>
+					<!-- // degree_register -->
+					
+				</article>
+				<!-- // page_conts -->
+			</section>
+		</div>
+		<!-- //sub_container -->
+		
+		<aside>
+			<div id="floatMenu">
+				<button type="button" class="bt_apply animate-element pulse">원서접수</button>
+				<button type="button" class="bt_gotop">TOP</button>
+			</div>
+		</aside>
+	</div>
+	<!-- // container -->
+	
+	<footer id="footer">
+		<div class="footer_inner trans400">
+			<div class="link">
+				<ul class="link_area">
+					<li><a href="http://www.chugye.ac.kr/mbs/university/subview.jsp?id=university_080201000000" target="_blank" title="새창으로 이동">개인정보처리방침</a></li>
+					<li><a href="https://www.chugye.ac.kr/mbs/university/jsp/board/list.jsp?boardId=545845&id=university_080500000000" target="_blank" title="새창으로 이동">개인정보공시</a></li>
+					<li><a href="http://www.chugye.ac.kr/mbs/university/subview.jsp?id=university_080301000000" target="_blank" title="새창으로 이동">이메일무단수집거부</a></li>
+					<li><a href="#" title="새창으로 이동">로그인</a></li>
+					<li><a href="#container" title="위로이동" class="bt_top"><img src="/images/front/common/bt_gotop.png" alt=""></a></li>
+				</ul>
+			</div>
+			<div class="foot_cont">
+				<ul class="address">
+					<li>03762 서울특별시 서대문구 북아현로 11가 길7</li>
+					<li class="inline"><span>TEL : 080-900-1255</span><span>FAX : 02-392-1777</span></li>
+					<li class="copyright">Copyright 2019 <em>CHUGYE UNIVERSITY FOR THE ARTS</em> All Right Reserved.</li>
+				</ul>
+				<div class="foot_logo"><img src="/images/front/common/foot_logo.png" alt="추계예술대학교 글로벌문화예술교육원"></div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

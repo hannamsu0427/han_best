@@ -1,0 +1,35 @@
+#category {font-size:13px;font-family: tahoma, verdana;position: relative;margin: 0;padding: 0;min-width: 270px;}
+#category .root {position: relative;margin: 0;padding: 7px;color:#797979;font-weight:400;font-size:13px;}
+#category ul {display: block;list-style: none;margin: 0;position: relative;padding: 5px 0 0 6px;background: url(/common/js/yakutree/images/line_tree_vr.gif) repeat-y 6px -1px;zoom: 1}
+#category ul li {position: relative;padding: 0px 0 5px 9px;background: url(/common/js/yakutree/images/line_tree_hr.gif) no-repeat 0 5px !important;white-space: nowrap;list-style: none}
+#category ul li a, 
+#category ul li span.tree_label {color: #000;text-decoration: none;position: relative;top: 0;left: 13px;_left /**/: 0;font-size:12px;}
+#category ul li a:hover, 
+#category ul li a.on {text-decoration:none;color: #ed6d00;}
+#category ul li button {display: inline-block;position: relative;*top: -2px;_top: -2px;_left /**/: -16px;width: 13px;*width: 17px;height: 13px;	*height: 17px;margin: 0 -11px 0 0;*margin: 0 -17px -2px -2px;
+	border: none;
+	background: url(/common/js/yakutree/images/btn_tree_collapse.gif) no-repeat;
+	*font-family: Sans-serif;
+	*font-size: 0;
+	*line-height: 0;
+	text-indent: -10000px;
+	*text-indent: 0;
+	cursor: pointer;
+	_cursor /**/: hand
+}
+#category ul li button.minus {background-position: 0 -13px;*background-position: 2px -11px}
+#category ul li button.plus {background-position: 0 0;*background-position: 2px 2px}
+#category ul li button.plus 
+#category ul li.tree_last {background: url(/common/js/yakutree/images/line_tree_last_hr.gif) no-repeat 0 5px !important}
+#category .selected {color: #1B87D4;font-weight: bold}
+#category .moveSpace {border: 1px dotted #CC0000;height: 2px;width: 200px;}
+#category .category_control {overflow:hidden;font-size:12px;}
+#category .category_control .btn {box-sizing:border-box;float:left;width:50%;border:0;border-left:1px solid #d1d1d1;background:url(/images/admin/bg_menu_ctr.gif) repeat-x 0 0;color:#666;font-weight:bold;line-height:36px;outline:0;}
+#category .category_control .btn:first-child {border-left:0}
+#category .category_control .btn.change {width:100%;background:#725959;border:0;color:#fff;}
+#category .category_control .btn>i{color:#000;margin-left:20px;font-size:14px;}
+#category .gExplorerCtrl:after {clear: both;content: " ";display:block;font-size:0;height:0;line-height:0;}
+#category .gExplorerCtrl {background: none repeat scroll 0 0 #F5F3F4;border-color: #DADADC #DADADC -moz-use-text-color;border-style: solid solid none;border-width: 1px 1px 0;margin: 10px 0 0;overflow: hidden;padding: 7px;}
+#category .directory {border-top:1px solid #000;border-right:1px solid #ddd;border-bottom:1px solid #000;border-left:1px solid #ddd;overflow:auto;padding:6px 7px 20px 7px;min-height:680px;}
+.placeholder {background: #bbb}
+.draggable, .draggable .moveTo {background-color: #ddd}

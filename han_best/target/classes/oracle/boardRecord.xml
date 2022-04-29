@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="boardRecord">
+
+	<typeAlias alias="boardRecord" type="com.itsp.vo.BoardVO" />
+	
+	<resultMap id="MapForList" class="boardRecord">
+		<result property="rnum" column="RNUM2" />
+		<result property="configSeq" column="CONFIG_SEQ" />
+		<result property="configName" column="CONFIG_NAME" />
+		<result property="configType" column="CONFIG_TYPE" />
+		<result property="categorySeq" column="CATEGORY_SEQ" />
+		<result property="categoryName" column="CATEGORY_NAME" />
+		<result property="noticeYn" column="NOTICE_YN" />
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />	
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		<result property="url" column="URL" />	
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		<result property="regId" column="REG_ID" />
+		<result property="regName" column="REG_NAME" />
+		<result property="hitCnt" column="HIT_CNT" />	
+		<result property="delYn" column="DEL_YN" />
+		<result property="secretYn" column="SECRET_YN" />
+		<result property="groupSeq" column="GROUP_SEQ" />
+		<result property="parentSeq" column="PARENT_SEQ" />
+		<result property="depth" column="DEPTH" />
+	</resultMap>
+	
+	<resultMap id="Map" class="boardRecord">
+		<result property="configSeq" column="CONFIG_SEQ" />
+		<result property="configName" column="CONFIG_NAME" />
+		<result property="categorySeq" column="CATEGORY_SEQ" />
+		<result property="categoryName" column="CATEGORY_NAME" />
+		
+		<result property="noticeYn" column="NOTICE_YN" />
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />		
+		<result property="url" column="URL" />	
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		<result property="regId" column="REG_ID" />
+		<result property="regName" column="REG_NAME" />
+		
+		<result property="hitCnt" column="HIT_CNT" />		
+		<result property="delYn" column="DEL_YN" />		
+		
+		<result property="groupSeq" column="GROUP_SEQ" />
+		<result property="parentSeq" column="PARENT_SEQ" />
+		<result property="depth" column="DEPTH" />
+		
+		<result property="password" column="PASSWORD" />
+		<result property="secretYn" column="SECRET_YN" />
+		
+		<result property="nextSeq" column="NEXT_SEQ" />
+		<result property="nextTitle" column="NEXT_TITLE" />
+		<result property="nextRegDate" column="NEXT_REG_DATE" />
+		<result property="preSeq" column="PRE_SEQ" />
+		<result property="preTitle" column="PRE_TITLE" />
+		<result property="preRegDate" column="PRE_REG_DATE" />
+	</resultMap>	
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_BOARD_RECORD
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="configSeq">
+			CONFIG_SEQ = #configSeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="categorySeq">
+			CATEGORY_SEQ = #categorySeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="delYn">
+			DEL_YN = #delYn#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchBy">
+			<isEqual property="searchBy" compareValue="all">
+				(
+				TITLE LIKE '%'||#searchValue#||'%'
+				OR
+				CONTENTS LIKE '%'||#searchValue#||'%'
+				)
+			</isEqual>
+			<isEqual property="searchBy" compareValue="title">
+				TITLE LIKE '%'||#searchValue#||'%'
+			</isEqual>
+			<isEqual property="searchBy" compareValue="contents">
+				CONTENTS LIKE '%'||#searchValue#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectListData" resultMap="MapForList">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT
+						CONFIG_SEQ,
+						(SELECT TITLE FROM I_BOARD_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+						(SELECT TYPE FROM I_BOARD_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_TYPE,
+						CATEGORY_SEQ,
+						(SELECT CATEGORY_NAME FROM I_BOARD_CATEGORY WHERE CATEGORY_SEQ = X.CATEGORY_SEQ ) AS CATEGORY_NAME,
+						NOTICE_YN,
+						SEQ,
+						TITLE,
+						CONTENTS,
+						URL,
+						REG_ID,
+						REG_NAME,
+						TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+						TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+						HIT_CNT,
+						DEL_YN,
+						SECRET_YN,
+						GROUP_SEQ,
+						PARENT_SEQ,
+						DEPTH
+					FROM I_BOARD_RECORD X
+					WHERE 1=1 
+					<isNotEmpty prepend="AND" property="delYn">
+						DEL_YN = #delYn#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="noticeYn">
+						NOTICE_YN = #noticeYn#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="inConfigSeqArray">
+						CONFIG_SEQ
+						<iterate prepend="IN" property="inConfigSeqArray" open="(" close=")" conjunction=",">
+							#inConfigSeqArray[]#
+						</iterate>
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="configSeq">
+						CONFIG_SEQ = #configSeq#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="categorySeq">
+						CATEGORY_SEQ = #categorySeq#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="searchBy">
+						<isEqual property="searchBy" compareValue="all">
+							(
+							TITLE LIKE '%'||#searchValue#||'%'
+							OR
+							CONTENTS LIKE '%'||#searchValue#||'%'
+							)
+						</isEqual>
+						<isEqual property="searchBy" compareValue="title">
+							TITLE LIKE '%'||#searchValue#||'%'
+						</isEqual>
+						<isEqual property="searchBy" compareValue="contents">
+							CONTENTS LIKE '%'||#searchValue#||'%'
+						</isEqual>
+					</isNotEmpty>
+					ORDER BY SEQ DESC, REG_DATE_FMT DESC
+				) A
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum# AND #endNum#
+		</isNotEmpty>
+		ORDER BY RNUM2
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM (
+			SELECT 
+				NOTICE_YN,
+				SEQ,
+				TITLE,
+				URL,
+				CONTENTS,
+				REG_DATE,
+				REG_DATE_FMT,
+				
+				REG_ID,
+				REG_NAME,
+				HIT_CNT,
+				DEL_YN,
+				CONFIG_SEQ,
+				CONFIG_NAME,
+				CATEGORY_SEQ,
+				CATEGORY_NAME,
+				
+				PASSWORD,
+				
+				GROUP_SEQ,
+				PARENT_SEQ,
+				DEPTH,
+				SECRET_YN,
+					
+				LEAD(SEQ,1) OVER (ORDER BY SEQ) NEXT_SEQ,
+				LEAD(TITLE,1, '다음 글이 없습니다.') OVER (ORDER BY SEQ) NEXT_TITLE,
+				LEAD(REG_DATE,1) OVER (ORDER BY SEQ) NEXT_REG_DATE,
+				LAG(SEQ,1) OVER (ORDER BY SEQ) PRE_SEQ,
+				LAG(TITLE,1, '이전 글이 없습니다.') OVER (ORDER BY SEQ) PRE_TITLE,
+				LAG(REG_DATE,1) OVER (ORDER BY SEQ) PRE_REG_DATE
+			FROM(
+				SELECT 
+					NOTICE_YN,
+					SEQ,
+					TITLE,
+					URL,
+					CONTENTS,
+					TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+					TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+					REG_ID,
+					REG_NAME,
+					HIT_CNT,
+					DEL_YN,
+					CONFIG_SEQ,
+					(SELECT TITLE FROM I_BOARD_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+					CATEGORY_SEQ,
+					(SELECT CATEGORY_NAME FROM I_BOARD_CATEGORY WHERE CATEGORY_SEQ = X.CATEGORY_SEQ ) AS CATEGORY_NAME,
+					GROUP_SEQ,
+					PARENT_SEQ,
+					DEPTH,
+					PASSWORD,
+					SECRET_YN
+				FROM I_BOARD_RECORD X
+				WHERE CONFIG_SEQ = #configSeq#
+				<isNotEmpty prepend="AND" property="categorySeq">
+					CATEGORY_SEQ = #categorySeq#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="delYn">
+					DEL_YN = #delYn#
+				</isNotEmpty>
+			)
+		)
+		WHERE SEQ= #seq#
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_BOARD_RECORD WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_BOARD_RECORD SET
+					CATEGORY_SEQ = <![CDATA[ #categorySeq#]]>,
+					<isNotEmpty property="noticeYn">
+						NOTICE_YN = #noticeYn#,
+					</isNotEmpty>
+					TITLE = #title#,
+					URL = #url#,
+					CONTENTS = <![CDATA[ #contents#]]>,
+					<isNotEmpty property="secretYn">
+						SECRET_YN = #secretYn#,
+					</isNotEmpty>
+					<isNotEmpty property="password">
+						PASSWORD = #password#,
+					</isNotEmpty>
+					MOD_DATE = SYSDATE,
+					MOD_ID = #modId#,
+					MOD_IP = #modIp#
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_BOARD_RECORD (
+					CONFIG_SEQ,
+					CATEGORY_SEQ,
+					SEQ,
+					NOTICE_YN,
+					TITLE,
+					URL,
+					CONTENTS,
+					SECRET_YN,
+					PASSWORD,
+					REG_ID,
+					REG_NAME,
+					REG_IP,
+					GROUP_SEQ,
+					PARENT_SEQ,
+					DEPTH
+				) VALUES(
+					#configSeq#,
+					#categorySeq#,
+					I_SEQ,
+					#noticeYn#,
+					#title#,
+					#url#,
+					#contents#,
+					#secretYn#,
+					#password#,
+					#regId#,
+					#regName#,
+					#regIp#,
+					#groupSeq#,
+					#parentSeq#,
+					#depth#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<update id="useProcData">
+		UPDATE I_BOARD_RECORD SET
+			DEL_YN = #delYn#,
+			MOD_DATE = SYSDATE
+		WHERE SEQ = #seq#
+	</update>
+	
+	<update id="increaseViewCount">
+		UPDATE I_BOARD_RECORD SET
+			HIT_CNT = (SELECT HIT_CNT+1 FROM I_BOARD_RECORD WHERE SEQ = #seq#)
+		WHERE 1=1
+		AND SEQ = #seq#
+	</update>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_BOARD_RECORD WHERE SEQ = #seq#
+	</delete>
+
+
+</sqlMap>

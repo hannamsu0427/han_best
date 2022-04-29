@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="member">
+
+	<typeAlias alias="memberVO" type="com.itsp.vo.MemberVO" />
+	
+	<select id="totalCount" resultClass="int">
+		SELECT COUNT(*)
+		FROM I_MANAGER
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="user_id">
+			USER_ID = #user_id#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectData" resultClass="memberVO">
+		SELECT * 
+		FROM I_MANAGER
+		WHERE 1=1
+		AND USER_ID = #user_id#
+	</select>
+
+	<select id="selectDataList" resultClass="memberVO">
+		SELECT B.* FROM(
+			SELECT ROWNUM RNUM, A.* FROM(
+				SELECT *  FROM I_MANAGER
+				WHERE 1=1
+				ORDER BY REG_DATE DESC
+			) A
+		) B
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum#
+			AND #endNum#
+		</isNotEmpty>
+	</select>
+
+	<insert id="insertDataProc">
+		INSERT INTO I_MANAGER(
+			SEQ,
+			USER_ID,
+			USER_NM
+		)VALUES(
+			IWORK_SEQUENCE.NEXTVAL ,
+			#user_id#,
+			#user_nm#
+		)
+	</insert>
+
+	<delete id="deleteDataProc">
+		DELETE FROM I_MANAGER
+		WHERE USER_ID = #user_id#
+	</delete>
+	
+	<insert id="insertRegActionProc">
+		INSERT INTO I_MANAGER_LOG(
+			SEQ,
+			USER_ID,
+			USER_NM,
+			ACTION,
+			REG_AGENT,
+			REG_OS,
+			REG_IP
+		)VALUES(
+			IWORK_SEQUENCE.NEXTVAL,
+			#user_id#,
+			#user_nm#,
+			#action#,
+			#regAgent#,
+			#regOs#,
+			#regIp#
+		)
+	</insert>
+	
+	<insert id="insertFailCountProc">
+		INSERT INTO I_MANAGER_COUNT(
+			USER_ID,
+			COUNT
+		)VALUES(
+			#user_id#,
+			'1'
+		)
+	</insert>
+	
+	<update id="updateFailCountProc">
+		UPDATE I_MANAGER_COUNT 
+		SET
+			MOD_DATE = SYSDATE,
+			COUNT = #count#
+		WHERE 
+			USER_ID = #user_id#
+	</update>
+	
+	<select id="failCount" resultClass="String">
+		SELECT COUNT
+		FROM I_MANAGER_COUNT
+		WHERE 1=1
+		AND USER_ID = #user_id#
+	</select>
+
+</sqlMap>

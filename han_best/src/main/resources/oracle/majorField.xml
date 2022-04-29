@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="majorField">
+
+	<typeAlias alias="majorField" type="com.itsp.vo.MajorVO" />
+	
+	<resultMap id="Map" class="majorField">
+		<result property="aboutSeq" column="ABOUT_SEQ" />
+		<result property="seq" column="SEQ" />
+		<result property="useYn" column="USE_YN" />
+		<result property="orderNum" column="ORDER_NUM" />
+		<result property="group" column="GROUP_TXT" />
+		<result property="groupInfo" column="GROUP_INFO" />
+		<result property="regDate" column="REG_DATE" />
+	</resultMap>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_MAJOR_FIELD
+		WHERE 1=1
+		AND ABOUT_SEQ = #aboutSeq#
+		<isNotEmpty prepend="AND" property="seq">
+			SEQ = #seq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectDataList" resultMap="Map">
+		SELECT * FROM I_MAJOR_FIELD
+		WHERE 1=1
+		AND ABOUT_SEQ = #aboutSeq#
+		<isNotEmpty prepend="AND" property="seq">
+			SEQ = #seq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		ORDER BY ORDER_NUM ASC, SEQ DESC
+	</select>
+
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM I_MAJOR_FIELD
+		WHERE 1=1 
+		AND ABOUT_SEQ = #aboutSeq#
+		AND SEQ= #seq#
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_MAJOR_FIELD WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_MAJOR_FIELD SET
+					USE_YN = #useYn#,
+					GROUP_TXT = #group#,
+					GROUP_INFO = #groupInfo#,
+					MOD_DATE = SYSDATE
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_MAJOR_FIELD (
+					ABOUT_SEQ,
+					SEQ,
+					USE_YN,
+					GROUP_TXT,
+					GROUP_INFO,
+					REG_ID,
+					REG_NAME,
+					REG_IP,
+					ORDER_NUM
+				) VALUES(
+					#aboutSeq#,
+					I_SEQ,
+					#useYn#,
+					#group#,
+					#groupInfo#,
+					#regId#,
+					#regName#,
+					#regIp#,
+					#orderNum#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_MAJOR_FIELD WHERE SEQ = #seq#
+	</delete>
+	
+	<update id="orderNumProc">
+		UPDATE I_MAJOR_FIELD SET
+			ORDER_NUM = #orderNum#,
+			MOD_DATE = SYSDATE
+		WHERE SEQ = #seq#
+	</update>
+
+</sqlMap>

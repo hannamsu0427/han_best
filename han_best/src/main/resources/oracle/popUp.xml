@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="popUp">
+
+	<typeAlias alias="popUp" type="com.itsp.vo.PopUpVO" />
+
+	<resultMap id="mapForList" class="popUp">
+		<result property="rnum" column="RNUM" />
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB" />
+		<result property="linkUrl" column="LINK_URL" />
+		<result property="linkYn" column="LINK_YN" />
+		<result property="setting" column="SETTING" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="modDate" column="MOD_DATE" />
+		<result property="type" column="TYPE" />
+		<result property="linkTarget" column="LINK_TARGET" />
+		<result property="orderNum" column="ORDER_NUM" />
+		<result property="useYn" column="USE_YN" />
+		<result property="txtColor" column="TXT_COLOR" />
+	</resultMap>
+
+	<resultMap id="map" class="popUp">
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB" />
+		<result property="linkUrl" column="LINK_URL" />
+		<result property="linkYn" column="LINK_YN" />
+		<result property="setting" column="SETTING" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="modDate" column="MOD_DATE" />
+		<result property="type" column="TYPE" />
+		<result property="linkTarget" column="LINK_TARGET" />
+		<result property="orderNum" column="ORDER_NUM" />
+		<result property="useYn" column="USE_YN" />
+		<result property="txtColor" column="TXT_COLOR" />
+	</resultMap>
+
+	<select id="totalCount" resultClass="int">
+		SELECT COUNT(*)
+		FROM I_POPUP
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="useYn">
+			<isEqual property="useYn" compareValue="Y">
+			(
+				(
+					USE_YN = 'Y' AND SETTING = 'A' 
+				)
+				OR
+				(
+					USE_YN = 'Y' AND SETTING = 'D' 
+					AND SYSDATE <![CDATA[>=]]> to_date(START_DATE, 'YYYY-MM-DD')
+					AND SYSDATE <![CDATA[<]]> to_date(END_DATE, 'YYYY-MM-DD') +1
+				)
+			)
+			</isEqual>
+			<isNotEqual property="useYn" compareValue="Y">
+				USE_YN = #useYn#
+			</isNotEqual>	
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectDataList" resultMap="mapForList">
+		SELECT *FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT
+						SEQ,
+						TITLE,
+						CONTENTS,
+						LINK_URL,
+						LINK_YN,
+						SETTING,
+						START_DATE,
+						END_DATE,
+						TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+						TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE,
+						TYPE,
+						LINK_TARGET,
+						ORDER_NUM,
+						USE_YN,
+						TXT_COLOR
+					FROM I_POPUP X
+					WHERE 1=1
+					<isNotEmpty prepend="AND" property="useYn">
+						<isEqual property="useYn" compareValue="Y">
+						(
+							(
+								USE_YN = 'Y' AND SETTING = 'A' 
+							)
+							OR
+							(
+								USE_YN = 'Y' AND SETTING = 'D' 
+								AND SYSDATE <![CDATA[>=]]> to_date(START_DATE, 'YYYY-MM-DD')
+								AND SYSDATE <![CDATA[<]]> to_date(END_DATE, 'YYYY-MM-DD') +1
+							)
+						)
+						</isEqual>
+						<isNotEqual property="useYn" compareValue="Y">
+							USE_YN = #useYn#
+						</isNotEqual>	
+					</isNotEmpty>
+					ORDER BY ORDER_NUM ASC, SEQ DESC
+				) A
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum#
+			AND #endNum#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectData" resultMap="map">
+		SELECT
+			SEQ,
+			TITLE,
+			CONTENTS,
+			LINK_URL,
+			LINK_YN,
+			SETTING,
+			START_DATE,
+			END_DATE,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+			TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE,
+			TYPE,
+			LINK_TARGET,
+			ORDER_NUM,
+			USE_YN,
+			TXT_COLOR
+		FROM I_POPUP
+		WHERE 1=1
+		AND SEQ = #seq#
+	</select>
+
+	<insert id="insertDataProc">
+		INSERT INTO I_POPUP(
+			SEQ,
+			TITLE,
+			CONTENTS,
+			LINK_URL,
+			LINK_YN,
+			SETTING,
+			START_DATE,
+			END_DATE,
+			TYPE,
+			LINK_TARGET,
+			ORDER_NUM,
+			USE_YN,
+			TXT_COLOR
+		) VALUES(
+			#seq#,
+			#title#,
+			#contents#,
+			#linkUrl#,
+			#linkYn#,
+			#setting#,
+			#startDate#,
+			#endDate#,
+			#type#,
+			#linkTarget#,
+			#orderNum#,
+			#useYn#,
+			#txtColor#
+		)
+	</insert>
+	
+	<update id="updateDataProc">
+		UPDATE I_POPUP SET
+			TITLE  = #title#,
+			CONTENTS  = #contents#,
+			LINK_URL  = #linkUrl#,
+			LINK_YN  = #linkYn#,
+			SETTING  = #setting#,
+			START_DATE  = #startDate#,
+			END_DATE  = #endDate#,
+			
+			TYPE = #type#,
+			LINK_TARGET = #linkTarget#,
+			ORDER_NUM = #orderNum#,
+			USE_YN = #useYn#,
+			
+			TXT_COLOR = #txtColor#
+		WHERE SEQ = #seq#
+	</update>
+	
+	<delete id="deleteDataProc">
+		DELETE FROM I_POPUP
+		WHERE 1=1
+		AND SEQ = #seq#
+	</delete>
+	
+	<update id="orderNumProc">
+		UPDATE I_POPUP SET
+			ORDER_NUM = #orderNum#,
+			MOD_DATE = SYSDATE
+		WHERE 1=1
+		AND SEQ = #seq#
+	</update>
+
+</sqlMap>

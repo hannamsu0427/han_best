@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name = "keywords" content ="">
+<meta name = "description" content ="">
+<title>글로벌문화예술교육원</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/admin/favicon.ico">
+<link href="/css/admin/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+	
+	<div class="right_column">
+		<div class="wrap">
+			<header>
+				<div class="header_inner">
+					<h3>게시판 관리</h3>
+					<ul class="location">
+						<li>기능 관리</li>
+						<li>게시판 관리</li>
+						<li class="here">게시판 목록</li>
+					</ul>
+					<div class="client"><img src="/images/admin/admin_logo.png"></div>
+				</div>
+			</header>
+			
+			<section>
+				<div class="container">
+					<div class="contents_inner">
+						<article>
+							<div class="pt20">
+								<div class="tabs">
+									<ul>
+										<li><a href="#" class="on"><span>기본설정 관리</span></a></li>
+										<li><a href="#"><span>카테고리 관리</span></a></li>
+										<li><a href="#"><span>게시물 관리</span></a></li>
+										<li><a href="#"><span>휴지통관리</span></a></li>
+									</ul>
+								</div>
+								
+								<div class="post_tbl">
+									<div class="grid_top">
+										<div class="ls"><h3>1.기본설정</h3></div>
+										<div class="rs"><span class="req fs13">일반게시판 및 답변게시판의 경우에만 설정가능</span></div>
+									</div>
+									
+									<table class="grid view">
+										<caption>기본설정 목록</caption>
+										<colgroup><col width="20%"><col width="80%"></colgroup>
+										<tbody>
+											<tr>
+												<th><span class="req pl10">사용여부</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="" id="useY" checked="checked"><label for="useY" class="pl5">사용</label></li>
+															<li><input type="radio" name="" id="useN"><label for="useN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="req pl10">공지설정</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="" id="periodY" checked="checked"><label for="useY" class="pl5">사용</label></li>
+															<li><input type="radio" name="" id="periodN"><label for="useN" class="pl5">미사용</label></li>
+															<li class="em">*공지사용 선택 시 기간 설정을 할 수 있습니다.</li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="req pl10">게시판제목</span></th>
+												<td><div class="row"><input type="text" name="" id="" value="" title="" placeholder="게시판제목" class="p100"></div></td>
+											</tr>
+											<tr>
+												<th><span class="req pl10">게시판유형</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline fl">
+															<li><input type="radio" name="" id="type1"><label for="type1" class="pl5">게시판형</label></li>
+															<li><input type="radio" name="" id="type2"><label for="type2" class="pl5">앨범형</label></li>
+															<li><input type="radio" name="" id="type3"><label for="type3" class="pl5">썸네일형식</label></li>
+														</ul>
+														<span class="fr em">*게시판 유형은 변경이 불가능 합니다.</span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl10">목록출력갯수</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><select name="listListLen" id="listListLen" class=""><option value="">선택</option></select> 줄</li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl10">새글출력설정</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><select name="miniNewDay" id="miniNewDay"><option value="">선택</option></select> 개</li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl20">이전글/다음글</span></th>
+												<td><div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="" id="useY" checked="checked"><label for="preNextY" class="pl5">사용</label></li>
+															<li><input type="radio" name="" id="useN"><label for="preNextN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl20">비회원 사용여부</span></th>
+												<td><div class="row">
+														<ul class="dp_inline fl">
+															<li><input type="radio" name="non_member" id="non_memberY" value="Y"><label for="non_memberY" class="pl5">사용</label></li>
+															<li><input type="radio" name="non_member" id="non_memberN" value="N" checked="checked"><label for="non_memberN" class="pl5">미사용</label></li>
+														</ul>
+														<span class="fr em">* 비회원도 작성이 가능합니다.</span>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- //post_tbl -->
+								
+								<div class="post_tbl">
+									<div class="grid_top">
+										<div class="ls"><h3>2.상세설정</h3></div>
+										<div class="rs"><span class="req fs13">일반게시판 및 답변게시판의 경우에만 설정가능</span></div>
+									</div>
+									
+									<table class="grid view">
+										<caption>상세설정 목록</caption>
+										<colgroup><col width="20%"><col width="80%"></colgroup>
+										<tbody>
+											<tr>
+												<th><span class="req pl10">첨부파일 사용여부</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="" id="useY" checked="checked"><label for="useY" class="pl5">사용</label></li>
+															<li><input type="radio" name="" id="useN"><label for="useN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="req pl10">첨부파일 갯수</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><select name="attachFileCnt" id="" title="첨부파일 갯수 선택"><option value="">선택</option></select></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="req pl10">첨부파일 용량</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="text" name="attachFileSize" id="" value="15" title="" placeholder="" size="6">&nbsp;MB</li>
+															<li class="fr"><span class="em">* 0MB일경우 파일업로드 불가</span></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl10">댓글 사용여부 </span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="commentYn" id="commentY" value="Y"><label for="commentY" class="pl5">사용</label></li>
+															<li><input type="radio" name="commentYn" id="commentN" value="N" checked="checked"><label for="commentN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl10">답글 사용여부 </span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="replyYn" id="replyY" value="Y"><label for="replyY" class="pl5">사용</label></li>
+															<li><input type="radio" name="replyYn" id="replyN" value="N" checked="checked"><label for="replyN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl10">편집기 사용여부 </span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="editorYn" id="editorY" value="Y" checked="checked"><label for="editorY" class="pl5">사용</label></li>
+															<li><input type="radio" name="editorYn" id="editorN" value="N"><label for="editorN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl10">휴지통 사용여부 </span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="basketYn" id="basketY" value="Y" checked="checked"><label for="basketY" class="pl5">사용</label></li>
+															<li><input type="radio" name="basketYn" id="basketN" value="N"><label for="basketN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- //post_tbl -->
+								
+								<div class="post_tbl">
+									<div class="grid_top">
+										<div class="ls"><h3>3.부가기능 설정</h3></div>
+										<div class="rs"></div>
+									</div>
+									
+									<table class="grid view">
+										<caption>부가기능 목록</caption>
+										<colgroup><col width="20%"><col width="80%"></colgroup>
+										<tbody>
+											<tr>
+												<th><span class="pl10">프린트 기능</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline">
+															<li><input type="radio" name="printYn" id="printY" value="Y"><label for="printY" class="pl5">사용</label></li>
+															<li><input type="radio" name="printYn" id="printN" value="N" checked="checked"><label for="printN" class="pl5">미사용</label></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><span class="pl10">비밀글 기능</span></th>
+												<td>
+													<div class="row">
+														<ul class="dp_inline fl">
+															<li><input type="radio" name="secretYn" id="secretY" value="Y"><label for="secretY" class="pl5">사용</label></li>
+															<li><input type="radio" name="secretYn" id="secretN" value="N" checked="checked"><label for="secretN" class="pl5">미사용</label></li>
+														</ul>
+														<span class="fr em">*관리자와 작성자 비밀번호를 아는사람만 접근 가능하며, 미사용 변경 시 모든 글이 노출됩니다.</span>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								<div class="post_bottom">
+									<div class="bt_list">
+										<button type="button" name="" id="" class="bt bt_nor" data-itsp-list-link="">목록</button>
+										<button type="button" name="" id="" class="bt bt_on" data-itsp-save-link="">저장하기</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="comment_box">
+								<ul>
+									<li><strong class="em">반드시 읽어보세요</strong></li>
+									<li>- 게시판 유형은 생성된 후 변경할 수 없습니다.</li>
+								</ul>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- //wrap -->
+	</div>
+	<!-- //right_column -->
+	
+	<div class="left_column">
+		<div class="left_header">
+			<h1>글로벌문화예술교육원</h1>
+			<span class="log_info"><button type="button" name="" id="" title="로그아웃" class="bt_ico_logout">로그아웃</button></span>
+		</div>
+		<!-- 
+		<div class="tab_langs">
+			<ul>
+				<li class="on"><a href="#" title="">기본</a></li>
+				<li><a href="#" title="">한국어</a></li>
+				<li><a href="#" title="">영어</a></li>
+				<li><a href="#" title="">중국어</a></li>
+			</ul>
+		</div>
+		 -->
+		<nav>
+			<div class="lnb">
+				<ul class="depth1">
+					<li><a href="#"><span>CMS 관리</span></a>
+						<ul class="depth2">
+							<li class="on"><a href="#"><span>메뉴관리</span></a></li>
+						</ul>
+					</li>
+					<li class="on"><a href="#"><span>기능 관리</span></a>
+						<ul class="depth2">
+							<li class="on"><a href="#"><span>게시판 관리</span></a></li>
+							<li><a href="#"><span>에디터 관리</span></a></li>
+							<li><a href="#"><span>계열 관리</span></a>
+								<ul class="depth3" style="display:block;">
+									<li><a href="#"><span>실용음악계열</span></a></li>
+									<li><a href="#"><span>무용계열</span></a></li>
+									<li><a href="#"><span>CCM계열</span></a></li>
+									<li><a href="#"><span>연극영화 계열</span></a></li>
+									<li><a href="#"><span>영화학&middot;방송영상학 계열</span></a></li>
+									<li><a href="#"><span>모델계열</span></a></li>
+									<li><a href="#"><span>문예창작계열</span></a></li>
+								</ul>
+							</li>
+							<li><a href="#"><span>일반과정 관리</span></a>
+								<ul class="depth3" style="display:block;">
+									<li><a href="#"><span>수묵과정</span></a></li>
+									<li><a href="#"><span>웹툰과정</span></a></li>
+								</ul>
+							</li>
+							<li><a href="#"><span>찾아오시는 길</span></a></li>
+						</ul>
+					</li>
+					<li><a href="#"><span>초기화면 관리</span></a></li>
+					<li><a href="#"><span>관리자 관리</span></a></li>
+					<li><a href="#"><span>통계</span></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- // left_column -->
+</body>
+</html>

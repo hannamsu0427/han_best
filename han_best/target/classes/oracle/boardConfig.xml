@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="boardConfig">
+
+	<typeAlias alias="boardConfig" type="com.itsp.vo.BoardVO" />
+
+	<resultMap id="MapForList" class="boardConfig">
+		<result property="rnum" column="RNUM" />
+		<result property="seq" column="SEQ" />
+		<result property="type" column="TYPE" />
+		<result property="title" column="TITLE" />
+		<result property="useYn" column="USE_YN" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="recordCnt" column="RECORD_CNT" />
+	</resultMap>
+	
+	<resultMap id="Map" class="boardConfig">
+		<result property="seq" column="SEQ" />
+		<result property="useYn" column="USE_YN" />
+		<result property="type" column="TYPE" />
+		<result property="noticeYn" column="NOTICE_YN" />
+		<result property="title" column="TITLE" />
+		<result property="subTitle" column="SUB_TITLE" />
+		<result property="newDay" column="NEW_DAY" />
+		<result property="preNextYn" column="PRE_NEXT_YN" />
+		<result property="fileYn" column="FILE_YN" />
+		<result property="fileCnt" column="FILE_CNT" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="commentYn" column="COMMENT_YN" />
+		<result property="replyYn" column="REPLY_YN" />
+		<result property="editorYn" column="EDITOR_YN" />
+		<result property="printYn" column="PRINT_YN" />
+		<result property="ipYn" column="IP_YN" />
+		<result property="secretYn" column="SECRET_YN" />
+		<result property="delYn" column="DEL_YN" />
+		<result property="nonMember" column="NON_MEMBER" />
+	</resultMap>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_BOARD_CONFIG
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="configSeq">
+			AND CONFIG_SEQ = #configSeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchBy">
+			<isEqual property="searchBy" compareValue="all">
+				(
+				TITLE LIKE '%'||#searchValue#||'%'
+				OR
+				SUB_TITLE LIKE '%'||#searchValue#||'%'
+				)
+			</isEqual>
+			<isEqual property="searchBy" compareValue="title">
+				TITLE LIKE '%'||#searchValue#||'%'
+			</isEqual>
+			<isEqual property="searchBy" compareValue="subTitle">
+				SUB_TITLE LIKE '%'||#searchValue#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectDataList" resultMap="MapForList">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT 
+						SEQ,
+						TYPE,
+						TITLE,
+						USE_YN,
+						REG_DATE,
+						(SELECT COUNT(*) FROM I_BOARD_RECORD WHERE CONFIG_SEQ = X.SEQ) AS RECORD_CNT
+					FROM I_BOARD_CONFIG X
+					WHERE 1=1
+					<isNotEmpty prepend="AND" property="useYn">
+						USE_YN = #useYn#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="searchBy">
+						<isEqual property="searchBy" compareValue="all">
+							(
+							TITLE LIKE '%'||#searchValue#||'%'
+							OR
+							SUB_TITLE LIKE '%'||#searchValue#||'%'
+							)
+						</isEqual>
+						<isEqual property="searchBy" compareValue="title">
+							TITLE LIKE '%'||#searchValue#||'%'
+						</isEqual>
+						<isEqual property="searchBy" compareValue="subTitle">
+							SUB_TITLE LIKE '%'||#searchValue#||'%'
+						</isEqual>
+					</isNotEmpty>
+				) A
+				ORDER BY REG_DATE DESC
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum#
+			AND #endNum#
+		</isNotEmpty>
+		ORDER BY RNUM2
+	</select>
+
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM I_BOARD_CONFIG
+		WHERE 1=1 
+		AND SEQ= #seq#
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_BOARD_CONFIG WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_BOARD_CONFIG SET
+					USE_YN = #useYn#,
+					NOTICE_YN = 	#noticeYn#,
+					TITLE = #title#,
+					SUB_TITLE = #subTitle#,
+					NEW_DAY = #newDay#,
+					PRE_NEXT_YN = #preNextYn#,
+					FILE_YN = #fileYn#,
+					FILE_CNT = #fileCnt#,
+					FILE_SIZE = #fileSize#,
+					COMMENT_YN = #commentYn#,
+					REPLY_YN = #replyYn#,
+					EDITOR_YN = #editorYn#,
+					PRINT_YN = #printYn#,
+					IP_YN = #ipYn#,
+					SECRET_YN = #secretYn#,
+					DEL_YN = #delYn#,
+					NON_MEMBER = #nonMember#,
+					MOD_DATE = SYSDATE
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_BOARD_CONFIG (
+					SEQ,
+					USE_YN,
+					TYPE,
+					NOTICE_YN,
+					TITLE,
+					SUB_TITLE,
+					REG_ID,
+					REG_NAME,
+					REG_IP,
+					NEW_DAY,
+					PRE_NEXT_YN,
+					FILE_YN,
+					FILE_CNT,
+					FILE_SIZE,
+					COMMENT_YN,
+					REPLY_YN,
+					EDITOR_YN,
+					PRINT_YN,
+					IP_YN,
+					SECRET_YN,
+					DEL_YN,
+					NON_MEMBER
+				) VALUES(
+					I_SEQ,
+					#useYn#,
+					#type#,
+					#noticeYn#,
+					#title#,
+					#subTitle#,
+					#regId#,
+					#regName#,
+					#regIp#,
+					#newDay#,
+					#preNextYn#,
+					#fileYn#,
+					#fileCnt#,
+					#fileSize#,
+					#commentYn#,
+					#replyYn#,
+					#editorYn#,
+					#printYn#,
+					#ipYn#,
+					#secretYn#,
+					#delYn#,
+					#nonMember#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_BOARD_CONFIG WHERE SEQ = #seq#
+	</delete>
+
+</sqlMap>

@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name = "keywords" content ="">
+<meta name = "description" content ="">
+<title>게시판 관리_기본설정</title>
+
+<!-- PC Favicon -->
+
+<link href="/css/admin/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	
+	<div class="right_column">
+		<div class="wrap">
+			<header>
+				<div class="header_inner">
+					<h3>게시판 기본설정</h3>
+					<ul class="location">
+						<li>Depth1</li>
+						<li>Depth1_1</li>
+						<li class="here">Depth1_1_1</li>
+					</ul>
+					<div class="client"><img src="/images/common/admin_logo.png"></div>
+				</div>
+			</header>
+			<section>
+				<div class="container">
+					<div class="contents_inner">
+						<article>
+							<div class="tabs">
+								<ul>
+									<li><a href="#" class="on"><span>기본설정</span></a></li>
+									<li><a href="#"><span>카테고리 관리</span></a></li>
+									<li><a href="#"><span>권한설정</span></a></li>
+									<li><a href="#"><span>게시물 관리</span></a></li>
+									<li><a href="#"><span>휴지통관리</span></a></li>
+								</ul>
+							</div>
+
+							<div class="post_tbl">
+								<div class="grid_top">
+									<div class="ls"><h3>기본설정</h3></div>
+									<div class="rs"><span class="req fs13">은 필수입력 사항입니다.</span></div>
+								</div>
+								<table class="grid view">
+									<caption>기본설정 목록</caption>
+									<colgroup><col width="20%"><col width="80%"></colgroup>
+									<tbody>
+										<tr>
+											<th><span class="req pl10">사용여부</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="useY" checked="checked"><label for="useY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="useN"><label for="useN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="req pl10">공지설정</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="periodY" checked="checked"><label for="useY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="periodN"><label for="useN" class="pl5">미사용</label></li>
+														<li class="em">*공지사용 선택 시 기간 설정을 할 수 있습니다.</li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<!-- 공지설정이 YES일때 활성화 -->
+										<tr>
+											<th><span class="req pl10">공지 기간설정</span></th>
+											<td>
+												<div class="row">
+													<input type="text" class="period hasDatepicker" name="" placeholder="시작년-월-일" value="" title="시작년-월-일" readonly="readonly" id="">
+													<span class="pl10 pr10">~</span>
+													<input type="text" class="period hasDatepicker" name="" placeholder="종료년-월-일" value="" title="종료년-월-일" readonly="readonly" id="">
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="req pl10">게시판제목</span></th>
+											<td><div class="row"><input type="text" name="" id="" value="" title="" placeholder="게시판제목" class="p100"></div></td>
+										</tr>
+										<tr>
+											<th><span class="req pl10">게시판운영자</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li class="fca"><span class="slash">슈퍼관리자</span></li>
+														<li><button type="button" class="bt_inner"> 회원검색</button></li>
+														<li><input type="checkbox" name="" id="open" ><label for="open" class="fca">운영자공개</label></li>
+														<li></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="req pl10">게시판유형</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline fl">
+														<li><input type="radio" name="" id="type1"><label for="type1" class="pl5">게시판형</label></li>
+														<li><input type="radio" name="" id="type2"><label for="type2" class="pl5">앨범형</label></li>
+														<li><input type="radio" name="" id="type3"><label for="type3" class="pl5">썸네일형식</label></li>
+														<li class="em">*게시판 유형은 변경이 불가능 합니다.</li>
+													</ul>
+													<span class="fr em">*게시판 유형은 변경이 불가능 합니다.</span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">목록출력갯수</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><strong class="pr10">초기화면용 :</strong><select name="" id=""><option value="">선택</option></select> 줄</li>
+														<li>/</li>
+														<li><strong class="pr10">일반화면용 :</strong><select name="" id=""><option value="">선택</option></select> 줄</li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">새글출력설정</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><strong class="pr10">출력갯수 :</strong><select name="" id=""><option value="">선택</option></select> 개</li>
+														<li>/</li>
+														<li><strong class="pr10">출력일자 :</strong><select name="" id=""><option value="">선택</option></select> 일</li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">목록제목글자수</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><strong class="pr10">초기화면용 :</strong><input type="text" name="" id="" value="15" size="6" title=""> 자</li>
+														<li>/</li>
+														<li><strong class="pr10">일반화면용 :</strong><select name="" id=""><option value="">선택</option></select> 일</li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl20">이전글/다음글</span></th>
+											<td><div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="useY" checked="checked"><label for="preNextY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="useN"><label for="preNextN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="post_tbl">
+								<div class="grid_top">
+									<div class="ls"><h3>상세설정</h3></div>
+									<div class="rs"><span class="req fs13">일반게시판 및 답변게시판의 경우에만 설정가능</span></div>
+								</div>
+								
+								<table class="grid view">
+									<caption>기본설정 목록</caption>
+									<colgroup><col width="20%"><col width="80%"></colgroup>
+									<tbody>
+										<tr>
+											<th><span class="req pl10">첨부파일 사용여부 </span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="attachFileY" checked="checked"><label for="attachFileY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="attachFileN"><label for="attachFileN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="req pl10">첨부파일 갯수</span></th>
+											<td>
+												<div class="row">
+													<select name="attachFileCnt" id="" title="첨부파일 갯수 선택"><option value="">선택</option></select> 개
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="req pl10">첨부파일 용량</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="text" name="" id="" value="" title="" placeholder="" size="6"> MB</li>
+														<li class="fr"><span class="em">* 0MB일경우 파일업로드 불가</span></li>
+													</ul>	
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">업로드 가능파일</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline fl">
+														<li><input type="radio" name="" id="uploadFileTypeB" checked="checked"><label for="uploadFileTypeB" class="pl5">기본</label></li>
+														<li><input type="radio" name="" id="uploadFileTypeA"><label for="uploadFileTypeA" class="pl5">오디오</label></li>
+														<li><input type="radio" name="" id="uploadFileTypeV"><label for="uploadFileTypeV" class="pl5">비디오</label></li>
+														<li><input type="radio" name="" id="uploadFileTypeI"><label for="uploadFileTypeI" class="pl5">이미지</label></li>
+													</ul>
+													<span class="fr">파일확장자 : alz,zip,txt,hwp,xls,xlsx,ppt,pptx,doc,docx,jpg,gif,bmp,asf,wma,avi,mpg,wmv,mpeg,pdf</span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">댓글 사용여부 </span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="commentY"><label for="commentY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="commentN" checked="checked"><label for="commentN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">답글 사용여부 </span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="replyY"><label for="replyY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="replyN" checked="checked"><label for="replyN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">편집기 사용여부 </span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="editorY" checked="checked"><label for="editorY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="editorN"><label for="editorN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">휴지통 사용여부 </span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="basketY" checked="checked"><label for="basketY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="basketN"><label for="basketN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+							<!-- //post_tbl -->
+							
+							<div class="post_tbl">
+								<div class="grid_top">
+									<div class="ls"><h3>부가기능 설정</h3></div>
+									<div class="rs"><span class="req fs13">*일반게시판 및 답변게시판의 경우에만 설정가능</span></div>
+								</div>
+								
+								<table class="grid view">
+									<caption>기본설정 목록</caption>
+									<colgroup><col width="20%"><col width="80%"></colgroup>
+									<tbody>
+										<tr>
+											<th><span class="pl10">SNS 링크 사용여부</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline fl">
+														<li><input type="radio" name="" id="snsY"><label for="snsY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="snsN" checked="checked"><label for="snsN" class="pl5">미사용</label></li>
+													</ul>
+													<span class="fr em">* Facebook, Twitter, Google+, band 지원</span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">프린트 기능</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline">
+														<li><input type="radio" name="" id="printY"><label for="printY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="printN" checked="checked"><label for="printN" class="pl5">미사용</label></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">IP 정보 사용여부</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline fl">
+														<li><input type="radio" name="" id="ipY"><label for="ipY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="ipN"  checked="checked"><label for="ipN" class="pl5">미사용</label></li>
+													</ul>
+													<span class="fr em">*상세 화면에 작성자의 IP가 표출됩니다.</span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th><span class="pl10">비밀글 기능</span></th>
+											<td>
+												<div class="row">
+													<ul class="dp_inline fl">
+														<li><input type="radio" name="" id="secretY"><label for="secretY" class="pl5">사용</label></li>
+														<li><input type="radio" name="" id="secretN" checked="checked"><label for="secretN" class="pl5">미사용</label></li>
+													</ul>
+													<span class="fr em">*관리자와 작성자 비밀번호를 아는사람만 접근 가능하며, 미사용 변경 시 모든 글이 노출됩니다.</span>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- //post_tbl -->
+							
+							<div class="post_bottom">
+								<div class="bt_list">
+									<button type="button" name="" id="" class="bt bt_on">수정하기</button>
+									<button type="button" name="" id="" class="bt bt_nor">삭제하기</button>
+								</div>
+							</div>
+							
+							<div class="comment_box">
+								<ul>
+									<li><strong class="em">반드시 읽어보세요</strong></li>
+									<li>- 컨텐츠의 그룹의 정보를 입력 후 , 저장하기 버튼을 클릭하시면 컨텐츠 그룹이 생성됩니다.</li>
+									<li>- 컨텐츠 그룹이 생성된후, 생성된 그룹의 컨텐츠를 관리 하실 수 있습니다.</li>
+									<li>- 페이지별 만족도 사용여부를 체크하시면, 페이지 만족도 기능을 사용할 수 있습니다.</li>
+								</ul>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- //wrap -->
+	</div>
+	
+	<div class="left_column">
+		<div class="left_header">
+			<h1>로그인</h1>
+			<span class="log_info"><button type="button" name="" id="" title="로그아웃" class="bt_ico_logout">로그아웃</button></span>
+		</div>
+		<nav>
+			<div class="lnb">
+				<ul class="depth1">
+					<li class="on"><a href="#"><span>menu1</span></a>
+						<ul class="depth2">
+							<li><a href="#"><span>menu1_1</span></a></li>
+							<li class="on"><a href="#"><span>menu1_2</span></a>
+								<ul class="depth3">
+									<li><a href="#"><span>menu1_2_1</span></a></li>
+									<li><a href="#"><span>menu1_2_2</span></a></li>
+									<li class="on"><a href="#"><span>menu1_2_3</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#"><span>menu2</span></a></li>
+					<li><a href="#"><span>menu3</span></a></li>
+					<li><a href="#"><span>menu4</span></a></li>
+					<li><a href="#"><span>menu5</span></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	
+	<div class="modal_popup"><!-- display:none 기본값, "on"클래스로 활성화 -->
+		<div class="modal_popup_page">
+			<div class="modal_popup_wrap" style="width:900px;">
+				<div class="header">
+					<h1>회원찾기</h1>
+					<div class="bt_close"><a href="#">창닫기</a></div>
+				</div>
+				<div class="section">
+					<div class="pb20">
+						<div class="dp_tbl p100">
+							<div class="dp_cell w400">
+								<div class="post_tbl">
+									<div class="grid_top">
+										<div class="ls"><h3>회원</h3></div>
+									</div>
+									<table class="grid">
+										<caption>회원목록</caption>
+										<colgroup></colgroup>
+										<thead>
+											<tr>
+												<th>아이디</th>
+												<th>이름</th>
+												<th>등록일</th>
+												<th>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>hong1234</td>
+												<td>홍길동</td>
+												<td>2019-00-00</td>
+												<td><button type="button" class="bt_inner">삭제</button></td>
+											</tr>
+											<tr>
+												<td>hong1234</td>
+												<td>홍길동</td>
+												<td>2019-00-00</td>
+												<td><button type="button" class="bt_inner">삭제</button></td>
+											</tr>
+											<tr>
+												<td>hong1234</td>
+												<td>홍길동</td>
+												<td>2019-00-00</td>
+												<td><button type="button" class="bt_inner">삭제</button></td>
+											</tr>
+											<tr>
+												<td>hong1234</td>
+												<td>홍길동</td>
+												<td>2019-00-00</td>
+												<td><button type="button" class="bt_inner">삭제</button></td>
+											</tr>
+											<tr>
+												<td>hong1234</td>
+												<td>홍길동</td>
+												<td>2019-00-00</td>
+												<td><button type="button" class="bt_inner">삭제</button></td>
+											</tr>
+											<tr>
+												<td>hong1234</td>
+												<td>홍길동</td>
+												<td>2019-00-00</td>
+												<td><button type="button" class="bt_inner">삭제</button></td>
+											</tr>
+											<tr>
+												<td>hong1234</td>
+												<td>홍길동</td>
+												<td>2019-00-00</td>
+												<td><button type="button" class="bt_inner">삭제</button></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- //post_tbl -->
+								<div class="post_bottom">
+									<div class="paginate">
+										<a href="#" class="roll first">처음</a><a href="#" class="roll prev">이전</a>
+										<span class="list"> <strong>1</strong><span><a href="#">2</a></span> <span><a href="#">3</a></span></span>
+										<a href="#" class="roll next">다음</a><a href="#" class="roll last">마지막</a>
+									</div>
+								</div>
+							</div>
+							<!--//Left End -->
+							
+							<div class="dp_cell vm">
+								<div class="pl10 pr10">
+									<button type="button" value="" title="추가" class="bt_img"><img src="/images/common/bt_rect_left.png" alt=""></button>
+									<button type="button" value="" title="삭제" class="bt_img"><img src="/images/common/bt_rect_right.png" alt=""></button>
+								</div>
+							</div>
+							
+							<div class="dp_cell w400">
+								<div class="post_tbl">
+									<div class="grid_top">
+										<div class="ls"><h3>사용자목록</h3></div>
+									</div>
+									
+									<div class="grid_search">
+										<fieldset>
+											<legend>게시판 검색</legend>
+											<ul class="dp_inline tc">
+												<li>
+													<label for="" class="blind">검색조건 선택</label>
+													<select name="" id="" title="" class="w130">
+														<option value="">제목 + 내용</option>
+														<option value="">제목</option>
+														<option value="">내용</option>
+													</select>
+												</li>
+												<li>
+													<label for="" class="blind">검색어 입력</label><input type="text" placeholder="검색어 입력" id="searchName" value="" name="searchName">
+												</li>
+												<li>
+													<label for="" class="blind">검색</label><button type="button" class="bt_s bt_search">검색</button>
+												</li>
+											</ul>
+										</fieldset>
+									</div>
+									
+									<div class="pt15">
+										<p class="tr pb5">
+											<label for="" class="pr10"><strong>선택한 회원에게 사이트 관리자 권한</strong></label><button type="button" class="bt_inner">부여하기</button>
+										</p>
+									</div>
+									
+									<table class="grid">
+										<caption>회원목록</caption>
+										<colgroup></colgroup>
+										<thead>
+											<tr>
+												<th></th>
+												<th>그룹</th>
+												<th>이름</th>
+												<th>아이디</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="checkbox" name="" ></td>
+												<td>학생</td>
+												<td>홍길동</td>
+												<td>hong1234</td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" name="" ></td>
+												<td>학생</td>
+												<td>홍길동</td>
+												<td>hong1234</td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" name="" ></td>
+												<td>학생</td>
+												<td>홍길동</td>
+												<td>hong1234</td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" name="" ></td>
+												<td>학생</td>
+												<td>홍길동</td>
+												<td>hong1234</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- //post_tbl -->
+								
+								<div class="post_bottom">
+									<div class="paginate">
+										<a href="#" class="roll first">처음</a><a href="#" class="roll prev">이전</a>
+										<span class="list"><strong>1</strong><span><a href="#">2</a></span> <span><a href="#">3</a></span></span>
+										<a href="#" class="roll next">다음</a><a href="#" class="roll last">마지막</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="comment_box">
+						<ul>
+							<li><strong class="em">반드시 읽어보세요</strong></li>
+							<li>- 관리자는 멀티로 선택할 수 있습니다. </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

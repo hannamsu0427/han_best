@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="swearWord">
+
+	<typeAlias alias="swearWord" type="com.itsp.vo.SwearWordVO" />
+	
+	<resultMap id="Map" class="swearWord">
+		<result property="seq" column="SEQ" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB" />
+		<result property="useYn" column="USE_YN" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="modDate" column="MOD_DATE" />
+	</resultMap>
+
+	<select id="totalCount" resultClass="int">
+		SELECT COUNT(*)
+		FROM I_SWEARWORD
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT
+			SEQ,
+			CONTENTS,
+			USE_YN,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+			TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE
+		FROM I_SWEARWORD
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+
+	<insert id="insertDataProc">
+		INSERT INTO I_SWEARWORD(
+			SEQ,
+			CONTENTS,
+			USE_YN
+		) VALUES(
+			IWORK_SEQUENCE.NEXTVAL,
+			#contents#,
+			#useYn#
+		)
+	</insert>
+	
+	<update id="updateDataProc">
+		UPDATE I_SWEARWORD SET
+			CONTENTS  = #contents#,
+			USE_YN = #useYn#,
+			MOD_DATE  = SYSDATE
+		WHERE SEQ = #seq#
+	</update>
+
+</sqlMap>

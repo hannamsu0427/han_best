@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="majorAbout">
+
+	<typeAlias alias="majorAbout" type="com.itsp.vo.MajorVO" />
+
+	<resultMap id="MapForList" class="majorAbout">
+		<result property="rnum" column="RNUM" />
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="useYn" column="USE_YN" />
+		<result property="regDate" column="REG_DATE" />
+	</resultMap>
+	
+	<resultMap id="Map" class="majorAbout">
+		<result property="seq" column="SEQ" />
+		<result property="useYn" column="USE_YN" />
+		<result property="title" column="TITLE" />
+		<result property="icoCurriculum" column="ICO_CURRICULUM" />
+		<result property="icoApply" column="ICO_APPLY" />
+		<result property="majorName" column="MAJOR_NAME" />
+		<result property="majorAboutTxt" column="MAJOR_ABOUT_TXT" />
+		<result property="dash" column="DASH" />
+		<result property="icoFace" column="ICO_FACE" />
+		<result property="faceUrl" column="FACE_URL" />
+		<result property="icoBlog" column="ICO_BLOG" />
+		<result property="blogUrl" column="BLOG_URL" />
+		<result property="icoInsa" column="ICO_INSA" />
+		<result property="insaUrl" column="INSA_URL" />
+		<result property="icoYtube" column="ICO_YTUBE" />
+		<result property="ytubeUrl" column="YTUBE_URL" />
+	</resultMap>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_MAJOR_ABOUT
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="seq">
+			SEQ = #seq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchBy">
+			<isEqual property="searchBy" compareValue="all">
+				(
+				TITLE LIKE '%'||#searchValue#||'%'
+				OR
+				MAJOR_NAME LIKE '%'||#searchValue#||'%'
+				OR
+				MAJOR_ABOUT_TXT LIKE '%'||#searchValue#||'%'
+				)
+			</isEqual>
+			<isEqual property="searchBy" compareValue="title">
+				TITLE LIKE '%'||#searchValue#||'%'
+			</isEqual>
+			<isEqual property="searchBy" compareValue="majorName">
+				MAJOR_NAME LIKE '%'||#searchValue#||'%'
+			</isEqual>
+			<isEqual property="searchBy" compareValue="majorAboutTxt">
+				MAJOR_ABOUT_TXT LIKE '%'||#searchValue#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectDataList" resultMap="MapForList">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT 
+						*
+					FROM I_MAJOR_ABOUT X
+					WHERE 1=1
+					<isNotEmpty prepend="AND" property="useYn">
+						USE_YN = #useYn#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="searchBy">
+						<isEqual property="searchBy" compareValue="all">
+							(
+							TITLE LIKE '%'||#searchValue#||'%'
+							OR
+							MAJOR_NAME LIKE '%'||#searchValue#||'%'
+							OR
+							MAJOR_ABOUT_TXT LIKE '%'||#searchValue#||'%'
+							)
+						</isEqual>
+						<isEqual property="searchBy" compareValue="title">
+							TITLE LIKE '%'||#searchValue#||'%'
+						</isEqual>
+						<isEqual property="searchBy" compareValue="majorName">
+							MAJOR_NAME LIKE '%'||#searchValue#||'%'
+						</isEqual>
+						<isEqual property="searchBy" compareValue="majorAboutTxt">
+							MAJOR_ABOUT_TXT LIKE '%'||#searchValue#||'%'
+						</isEqual>
+					</isNotEmpty>
+				) A
+				ORDER BY REG_DATE DESC
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum#
+			AND #endNum#
+		</isNotEmpty>
+		ORDER BY RNUM2
+	</select>
+
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM I_MAJOR_ABOUT
+		WHERE 1=1 
+		AND SEQ= #seq#
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_MAJOR_ABOUT WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_MAJOR_ABOUT SET
+					USE_YN = #useYn#,
+					TITLE = #title#,
+					ICO_CURRICULUM = #icoCurriculum#,
+					ICO_APPLY = #icoApply#,
+					MAJOR_NAME = #majorName#,
+					MAJOR_ABOUT_TXT = #majorAboutTxt#,
+					DASH = #dash#,
+					ICO_FACE = #icoFace#,
+					FACE_URL = #faceUrl#,
+					ICO_BLOG = #icoBlog#,
+					BLOG_URL = #blogUrl#,
+					ICO_INSA = #icoInsa#,
+					INSA_URL = #insaUrl#,
+					ICO_YTUBE = #icoYtube#,
+					YTUBE_URL = #ytubeUrl#,
+					MOD_DATE = SYSDATE
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_MAJOR_ABOUT (
+					SEQ,
+					USE_YN,
+					TITLE,
+					ICO_CURRICULUM,
+					ICO_APPLY,
+					MAJOR_NAME,
+					MAJOR_ABOUT_TXT,
+					DASH,
+					ICO_FACE,
+					FACE_URL,
+					ICO_BLOG,
+					BLOG_URL,
+					ICO_INSA,
+					INSA_URL,
+					ICO_YTUBE,
+					YTUBE_URL,
+					REG_ID,
+					REG_NAME,
+					REG_IP
+				) VALUES(
+					I_SEQ,
+					#useYn#,
+					#title#,
+					#icoCurriculum#,
+					#icoApply#,
+					#majorName#,
+					#majorAboutTxt#,
+					#dash#,
+					#icoFace#,
+					#faceUrl#,
+					#icoBlog#,
+					#blogUrl#,
+					#icoInsa#,
+					#insaUrl#,
+					#icoYtube#,
+					#ytubeUrl#,
+					#regId#,
+					#regName#,
+					#regIp#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_MAJOR_ABOUT WHERE SEQ = #seq#
+	</delete>
+
+</sqlMap>

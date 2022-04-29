@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="historyRecord">
+
+	<typeAlias alias="historyRecord" type="com.itsp.vo.HistoryVO" />
+	
+	<resultMap id="MapForList" class="historyRecord">
+		<result property="configSeq" column="CONFIG_SEQ" />
+		<result property="configName" column="CONFIG_NAME" />
+		<result property="categorySeq" column="CATEGORY_SEQ" />
+		<result property="categoryName" column="CATEGORY_NAME" />
+		<result property="seq" column="SEQ" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		<result property="regId" column="REG_ID" />
+		<result property="regName" column="REG_NAME" />
+		<result property="startYear" column="START_YEAR" />
+		<result property="startMonth" column="START_MONTH" />
+		<result property="startDay" column="START_DAY" />
+		<result property="endYear" column="END_YEAR" />
+		<result property="endMonth" column="END_MONTH" />
+		<result property="endDay" column="END_DAY" />
+	</resultMap>
+	
+	<resultMap id="Map" class="historyRecord">
+		<result property="configSeq" column="CONFIG_SEQ" />
+		<result property="configName" column="CONFIG_NAME" />
+		<result property="categorySeq" column="CATEGORY_SEQ" />
+		<result property="categoryName" column="CATEGORY_NAME" />
+		<result property="seq" column="SEQ" />
+		<result property="contents" column="CONTENTS" jdbcType="CLOB"  />
+		<result property="regDate" column="REG_DATE" />
+		<result property="regDateFmt" column="REG_DATE_FMT" />
+		<result property="regId" column="REG_ID" />
+		<result property="regName" column="REG_NAME" />
+		<result property="startYear" column="START_YEAR" />
+		<result property="startMonth" column="START_MONTH" />
+		<result property="startDay" column="START_DAY" />
+		<result property="endYear" column="END_YEAR" />
+		<result property="endMonth" column="END_MONTH" />
+		<result property="endDay" column="END_DAY" />
+	</resultMap>	
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_HISTORY_RECORD
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="configSeq">
+			AND CONFIG_SEQ = #configSeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="categorySeq">
+			AND CATEGORY_SEQ = #categorySeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectListData" resultMap="MapForList">
+		SELECT
+			CONFIG_SEQ,
+			(SELECT TITLE FROM I_HISTORY_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+			CATEGORY_SEQ,
+			(SELECT CATEGORY_NAME FROM I_HISTORY_CATEGORY WHERE CATEGORY_SEQ = X.CATEGORY_SEQ ) AS CATEGORY_NAME,
+			SEQ,
+			CONTENTS,
+			REG_ID,
+			REG_NAME,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+			DEL_YN,
+			START_YEAR,
+			START_MONTH,
+			START_DAY,
+			END_YEAR,
+			END_MONTH,
+			END_DAY
+		FROM I_HISTORY_RECORD X
+		WHERE 1=1 
+		AND CONFIG_SEQ = #configSeq#
+		<isNotEmpty prepend="AND" property="categorySeq">
+			CATEGORY_SEQ = #categorySeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="delYn">
+			DEL_YN = #delYn#
+		</isNotEmpty>
+		ORDER BY START_YEAR DESC, START_MONTH DESC, START_DAY DESC, SEQ DESC
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT 
+			CONFIG_SEQ,
+			(SELECT TITLE FROM I_HISTORY_CONFIG WHERE SEQ = X.CONFIG_SEQ ) AS CONFIG_NAME,
+			CATEGORY_SEQ,
+			(SELECT CATEGORY_NAME FROM I_HISTORY_CATEGORY WHERE CATEGORY_SEQ = X.CATEGORY_SEQ ) AS CATEGORY_NAME,
+			SEQ,
+			CONTENTS,
+			REG_ID,
+			REG_NAME,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
+			TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+			DEL_YN,
+			START_YEAR,
+			START_MONTH,
+			START_DAY,
+			END_YEAR,
+			END_MONTH,
+			END_DAY
+		FROM I_HISTORY_RECORD
+		WHERE CONFIG_SEQ = #configSeq#
+		AND SEQ= #seq#
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_HISTORY_RECORD WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_HISTORY_RECORD SET
+					CATEGORY_SEQ = <![CDATA[ #categorySeq#]]>,
+					CONTENTS = <![CDATA[ #contents#]]>,
+					DEL_YN = #delYn#,
+					START_YEAR = #startYear#,
+					START_MONTH = 	#startMonth#,
+					START_DAY = #startDay#,
+					END_YEAR = #endYear#,
+					END_MONTH = #endMonth#,
+					END_DAY = 	#endDay#,	
+					MOD_DATE = SYSDATE,
+					MOD_ID = #modId#,
+					MOD_IP = #modIp#
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_HISTORY_RECORD (
+					CONFIG_SEQ,
+					CATEGORY_SEQ,
+					SEQ,
+					CONTENTS,
+					REG_ID,
+					REG_NAME,
+					REG_IP,
+					START_YEAR,
+					START_MONTH,
+					START_DAY,
+					END_YEAR,
+					END_MONTH,
+					END_DAY
+				) VALUES(
+					#configSeq#,
+					#categorySeq#,
+					I_SEQ,
+					#contents#,
+					#regId#,
+					#regName#,
+					#regIp#,
+					#startYear#,
+					#startMonth#,
+					#startDay#,
+					#endYear#,
+					#endMonth#,
+					#endDay#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<update id="useProcData">
+		UPDATE I_HISTORY_RECORD SET
+			DEL_YN = #delYn#,
+			MOD_DATE = SYSDATE
+		WHERE SEQ = #seq#
+	</update>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_HISTORY_RECORD WHERE SEQ = #seq#
+	</delete>
+
+
+</sqlMap>

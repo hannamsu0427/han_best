@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="googleAnalytics">
+
+	<typeAlias alias="googleAnalytics" type="com.itsp.vo.GoogleAnalyticsVO" />
+	
+	<resultMap id="Map" class="googleAnalytics">
+		<result property="seq" column="SEQ" />
+		<result property="contents" column="CONTENTS" jdbcType="NCLOB" />
+		<result property="useYn" column="USE_YN" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="modDate" column="MOD_DATE" />
+	</resultMap>
+
+	<select id="totalCount" resultClass="int">
+		SELECT COUNT(*)
+		FROM I_GOOGLE_ANALYTICS
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM I_GOOGLE_ANALYTICS
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+
+	<insert id="insertDataProc">
+		INSERT INTO I_GOOGLE_ANALYTICS(
+			SEQ,
+			CONTENTS,
+			USE_YN
+		) VALUES(
+			IWORK_SEQUENCE.NEXTVAL ,
+			#contents#,
+			#useYn#
+		)
+	</insert>
+	
+	<update id="updateDataProc">
+		UPDATE I_GOOGLE_ANALYTICS SET
+			CONTENTS  = #contents#,
+			USE_YN = #useYn#,
+			MOD_DATE  = SYSDATE
+		WHERE SEQ = #seq#
+	</update>
+
+</sqlMap>

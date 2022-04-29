@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="record">
+
+	<select id="seqNextVal" resultClass="string">
+		SELECT
+		<!--  LPAD(IWORK_SEQUENCE.NEXTVAL,15,0)  -->
+		IWORK_SEQUENCE.NEXTVAL AS SEQ FROM DUAL
+	</select>
+
+</sqlMap>

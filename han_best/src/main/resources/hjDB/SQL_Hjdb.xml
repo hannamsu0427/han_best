@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SQL_Hjdb">
+
+	<typeAlias alias="memberVO" type="com.itsp.vo.MemberVO" />
+	
+	<select id="totalCount" resultClass="int">
+		SELECT COUNT(*)
+		FROM HJDB.APS010TL X
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="searchBy">
+			<isEqual property="searchBy" compareValue="all">
+				(
+				APS010_EMP_ID LIKE '%'||#searchName#||'%'
+				OR
+				APS010_KOR_NM LIKE '%'||#searchName#||'%'
+				)
+			</isEqual>
+			<isEqual property="searchBy" compareValue="user_id">
+				APS010_EMP_ID LIKE '%'||#searchName#||'%'
+			</isEqual>
+			<isEqual property="searchBy" compareValue="use_nm">
+				APS010_KOR_NM LIKE '%'||#searchName#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectData" resultClass="memberVO">
+		/** 교직원로그인 */
+		SELECT 
+			APS010_EMP_ID AS user_id, 
+			APS010_KOR_NM AS user_nm,
+			APS010_DIV AS div, 
+			APS010_OFF_DIV AS offdiv, 
+			APS010_ID1, 
+			APS010_ID2,
+			APS010_DPT_CD1 AS dept1, 
+			APS010_DPT_CD2 AS deptcd, 
+			APS010_GRADE_CD,
+			CASE 
+				WHEN APS010_DIV IN (1,8) THEN 'P' 
+				WHEN APS010_DIV IN (2,4,9) THEN 'O'
+				WHEN APS010_DIV IN (3) THEN 'I' 
+				ELSE 'E' 
+			END AS usergb
+		FROM HJDB.APS010TL X
+		WHERE 1=1
+		AND APS010_EMP_ID = #user_id#
+	</select>
+	
+	<select id="selectDataList" resultClass="memberVO">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT 
+						APS010_EMP_ID AS user_id, 
+						APS010_KOR_NM AS user_nm,
+						APS010_DIV AS div, 
+						APS010_OFF_DIV AS offdiv, 
+						APS010_ID1, 
+						APS010_ID2,
+						APS010_DPT_CD1 AS dept1, 
+						APS010_DPT_CD2 AS deptcd, 
+						APS010_GRADE_CD,
+						CASE 
+							WHEN APS010_DIV IN (1,8) THEN 'P' 
+							WHEN APS010_DIV IN (2,4,9) THEN 'O'
+							WHEN APS010_DIV IN (3) THEN 'I' 
+							ELSE 'E' 
+						END AS usergb
+					FROM HJDB.APS010TL X
+					WHERE 1=1
+					<isNotEmpty prepend="AND" property="searchBy">
+						<isEqual property="searchBy" compareValue="all">
+							(
+							APS010_EMP_ID LIKE '%'||#searchName#||'%'
+							OR
+							APS010_KOR_NM LIKE '%'||#searchName#||'%'
+							)
+						</isEqual>
+						<isEqual property="searchBy" compareValue="user_id">
+							APS010_EMP_ID LIKE '%'||#searchName#||'%'
+						</isEqual>
+						<isEqual property="searchBy" compareValue="use_nm">
+							APS010_KOR_NM LIKE '%'||#searchName#||'%'
+						</isEqual>
+					</isNotEmpty>
+					ORDER BY APS010_KOR_NM ASC
+				) A
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum#
+			AND #endNum#
+		</isNotEmpty>
+	</select>
+	
+	
+</sqlMap>

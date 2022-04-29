@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" maxRequests="32" maxSessions="10"
+		maxTransactions="5" useStatementNamespaces="true" />
+
+	<sqlMap resource="oracle/application.xml" />
+	<sqlMap resource="oracle/attachFile.xml" />
+
+	<sqlMap resource="oracle/boardCategory.xml" />
+	<sqlMap resource="oracle/boardConfig.xml" />
+
+	<!-- 본문
+	 -->
+	<sqlMap resource="oracle/boardRecord.xml" />
+
+	<!-- 답글 -->
+	<sqlMap resource="oracle/boardReply.xml" />
+	
+	<!-- 댓글 -->
+	<sqlMap resource="oracle/boardComments.xml" />	
+	
+
+	<sqlMap resource="oracle/directions.xml" />
+
+	<sqlMap resource="oracle/editorConfig.xml" />
+	<sqlMap resource="oracle/editorRecord.xml" />
+
+	<sqlMap resource="oracle/etc.xml" />
+
+	<sqlMap resource="oracle/facilityConfig.xml" />
+	<sqlMap resource="oracle/facilityRecord.xml" />
+	
+	<sqlMap resource="oracle/googleAnalytics.xml" />
+
+	<sqlMap resource="oracle/historyCategory.xml" />
+	<sqlMap resource="oracle/historyConfig.xml" />
+	<sqlMap resource="oracle/historyRecord.xml" />
+
+	<sqlMap resource="oracle/member.xml" />
+
+	<sqlMap resource="oracle/majorApplication.xml" />
+	<sqlMap resource="oracle/majorAbout.xml" />
+	<sqlMap resource="oracle/majorCourse.xml" />
+	<sqlMap resource="oracle/majorCurriculum.xml" />
+	<sqlMap resource="oracle/majorFacilities.xml" />
+	<sqlMap resource="oracle/majorField.xml" />
+	<sqlMap resource="oracle/majorGoal.xml" />
+	<sqlMap resource="oracle/majorIntro.xml" />
+	<sqlMap resource="oracle/majorProfessor.xml" />
+
+	<sqlMap resource="oracle/menu.xml" />
+	<sqlMap resource="oracle/popUp.xml" />
+	<sqlMap resource="oracle/record.xml" />
+
+	<sqlMap resource="oracle/scheduleConfig.xml" />
+	<sqlMap resource="oracle/scheduleRecord.xml" />
+
+	<sqlMap resource="oracle/swearWord.xml" />
+
+	<sqlMap resource="oracle/visit.xml" />
+	<sqlMap resource="oracle/visual.xml" />
+
+</sqlMapConfig>

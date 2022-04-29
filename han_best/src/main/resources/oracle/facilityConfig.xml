@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="facilityConfig">
+
+	<typeAlias alias="facilityConfig" type="com.itsp.vo.FacilityVO" />
+
+	<resultMap id="MapForList" class="facilityConfig">
+		<result property="rnum" column="RNUM" />
+		<result property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="explanation" column="EXPLANATION" />
+		<result property="useYn" column="USE_YN" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="recordCnt" column="RECORD_CNT" />
+	</resultMap>
+	
+	<resultMap id="Map" class="facilityConfig">
+		<result property="seq" column="SEQ" />
+		<result property="useYn" column="USE_YN" />
+		<result property="title" column="TITLE" />
+		<result property="explanation" column="EXPLANATION" />
+	</resultMap>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_FACILITY_CONFIG
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="configSeq">
+			AND CONFIG_SEQ = #configSeq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchBy">
+			<isEqual property="searchBy" compareValue="all">
+				(
+				TITLE LIKE '%'||#searchValue#||'%'
+				OR
+				EXPLANATION LIKE '%'||#searchValue#||'%'
+				)
+			</isEqual>
+			<isEqual property="searchBy" compareValue="title">
+				TITLE LIKE '%'||#searchValue#||'%'
+			</isEqual>
+			<isEqual property="searchBy" compareValue="explanation">
+				EXPLANATION LIKE '%'||#searchValue#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectDataList" resultMap="MapForList">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT 
+						SEQ,
+						TITLE,
+						EXPLANATION,
+						USE_YN,
+						REG_DATE,
+						(SELECT COUNT(*) FROM I_FACILITY_RECORD WHERE CONFIG_SEQ = X.SEQ) AS RECORD_CNT
+					FROM I_FACILITY_CONFIG X
+					WHERE 1=1
+					<isNotEmpty prepend="AND" property="useYn">
+						USE_YN = #useYn#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="searchBy">
+						<isEqual property="searchBy" compareValue="all">
+							(
+							TITLE LIKE '%'||#searchValue#||'%'
+							OR
+							EXPLANATION LIKE '%'||#searchValue#||'%'
+							)
+						</isEqual>
+						<isEqual property="searchBy" compareValue="title">
+							TITLE LIKE '%'||#searchValue#||'%'
+						</isEqual>
+						<isEqual property="searchBy" compareValue="explanation">
+							EXPLANATION LIKE '%'||#searchValue#||'%'
+						</isEqual>
+					</isNotEmpty>
+				) A
+				ORDER BY REG_DATE DESC
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum#
+			AND #endNum#
+		</isNotEmpty>
+		ORDER BY RNUM2
+	</select>
+
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM I_FACILITY_CONFIG
+		WHERE 1=1 
+		AND SEQ= #seq#
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_FACILITY_CONFIG WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_FACILITY_CONFIG SET
+					USE_YN = #useYn#,
+					TITLE = #title#,
+					EXPLANATION = #explanation#,
+					MOD_DATE = SYSDATE
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_facility_CONFIG (
+					SEQ,
+					USE_YN,
+					TITLE,
+					EXPLANATION,
+					REG_ID,
+					REG_NAME,
+					REG_IP
+				) VALUES(
+					I_SEQ,
+					#useYn#,
+					#title#,
+					#explanation#,
+					#regId#,
+					#regName#,
+					#regIp#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_FACILITY_CONFIG WHERE SEQ = #seq#
+	</delete>
+
+</sqlMap>

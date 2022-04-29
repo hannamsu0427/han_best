@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="majorProfessor">
+
+	<typeAlias alias="majorProfessor" type="com.itsp.vo.MajorVO" />
+	
+	<resultMap id="MapForList" class="majorProfessor">
+		<result property="rnum" column="RNUM" />
+		<result property="aboutSeq" column="ABOUT_SEQ" />
+		<result property="seq" column="SEQ" />
+		<result property="useYn" column="USE_YN" />
+		<result property="orderNum" column="ORDER_NUM" />
+		<result property="title" column="TITLE" />
+		<result property="enTitle" column="EN_TITLE" />
+		<result property="position" column="POSITION" />
+		<result property="major" column="MAJOR" />
+		<result property="academicBackground" column="ACADEMIC_BACKGROUND" />
+		<result property="career" column="CAREER" />
+		<result property="regDate" column="REG_DATE" />
+	</resultMap>
+	
+	<resultMap id="Map" class="majorProfessor">
+		<result property="aboutSeq" column="ABOUT_SEQ" />
+		<result property="seq" column="SEQ" />
+		<result property="useYn" column="USE_YN" />
+		<result property="orderNum" column="ORDER_NUM" />
+		<result property="title" column="TITLE" />
+		<result property="enTitle" column="EN_TITLE" />
+		<result property="position" column="POSITION" />
+		<result property="major" column="MAJOR" />
+		<result property="academicBackground" column="ACADEMIC_BACKGROUND" />
+		<result property="career" column="CAREER" />
+		<result property="regDate" column="REG_DATE" />
+	</resultMap>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM
+		I_MAJOR_PROFESSOR
+		WHERE 1=1
+		AND ABOUT_SEQ = #aboutSeq#
+		<isNotEmpty prepend="AND" property="seq">
+			SEQ = #seq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchBy">
+			<isEqual property="searchBy" compareValue="all">
+				(
+				TITLE LIKE '%'||#searchValue#||'%'
+				OR
+				EN_TITLE LIKE '%'||#searchValue#||'%'
+				OR
+				POSITION LIKE '%'||#searchValue#||'%'
+				OR
+				MAJOR LIKE '%'||#searchValue#||'%'
+				)
+			</isEqual>
+			<isEqual property="searchBy" compareValue="title">
+				(
+				TITLE LIKE '%'||#searchValue#||'%'
+				OR
+				EN_TITLE LIKE '%'||#searchValue#||'%'
+				)
+			</isEqual>
+			<isEqual property="searchBy" compareValue="major">
+				MAJOR LIKE '%'||#searchValue#||'%'
+			</isEqual>
+			<isEqual property="searchBy" compareValue="position">
+				POSITION LIKE '%'||#searchValue#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectDataList" resultMap="MapForList">
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM2,B.* FROM (
+				SELECT ROWNUM AS RNUM,A.* FROM (
+					SELECT 
+						*
+					FROM I_MAJOR_PROFESSOR X
+					WHERE 1=1
+					AND ABOUT_SEQ = #aboutSeq#
+					<isNotEmpty prepend="AND" property="useYn">
+						USE_YN = #useYn#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="searchBy">
+						<isEqual property="searchBy" compareValue="all">
+							(
+							TITLE LIKE '%'||#searchValue#||'%'
+							OR
+							EN_TITLE LIKE '%'||#searchValue#||'%'
+							OR
+							POSITION LIKE '%'||#searchValue#||'%'
+							OR
+							MAJOR LIKE '%'||#searchValue#||'%'
+							)
+						</isEqual>
+						<isEqual property="searchBy" compareValue="title">
+							(
+							TITLE LIKE '%'||#searchValue#||'%'
+							OR
+							EN_TITLE LIKE '%'||#searchValue#||'%'
+							)
+						</isEqual>
+						<isEqual property="searchBy" compareValue="major">
+							MAJOR LIKE '%'||#searchValue#||'%'
+						</isEqual>
+						<isEqual property="searchBy" compareValue="position">
+							POSITION LIKE '%'||#searchValue#||'%'
+						</isEqual>
+					</isNotEmpty>
+					ORDER BY ORDER_NUM ASC, TITLE ASC, SEQ DESC
+				) A
+				
+			) B
+		)
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="startNum">
+			RNUM2 BETWEEN #startNum#
+			AND #endNum#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectData" resultMap="Map">
+		SELECT * FROM I_MAJOR_PROFESSOR
+		WHERE 1=1 
+		AND ABOUT_SEQ = #aboutSeq#
+		AND SEQ= #seq#
+		<isNotEmpty prepend="AND" property="useYn">
+			USE_YN = #useYn#
+		</isNotEmpty>
+	</select>
+	
+	<procedure id="saveProcData">
+		DECLARE
+		I_COUNT NUMBER;
+		I_SEQ VARCHAR2(10) := #seq#;
+		BEGIN
+			SELECT COUNT(SEQ) INTO I_COUNT FROM I_MAJOR_Professor WHERE SEQ = I_SEQ;
+			BEGIN
+			IF I_COUNT <![CDATA[<>]]> 0 THEN
+				UPDATE I_MAJOR_Professor SET
+					USE_YN = #useYn#,
+					TITLE = #title#,
+					EN_TITLE = #enTitle#,
+					POSITION = #position#,
+					MAJOR = #major#,
+					ACADEMIC_BACKGROUND = #academicBackground#,
+					CAREER = #career#,
+					MOD_DATE = SYSDATE
+				WHERE SEQ = I_SEQ;
+			ELSE
+				INSERT INTO I_MAJOR_Professor (
+					ABOUT_SEQ,
+					SEQ,
+					USE_YN,
+					TITLE,
+					EN_TITLE,
+					POSITION,
+					MAJOR,
+					ACADEMIC_BACKGROUND,
+					CAREER,
+					REG_ID,
+					REG_NAME,
+					REG_IP,
+					ORDER_NUM
+				) VALUES(
+					#aboutSeq#,
+					I_SEQ,
+					#useYn#,
+					#title#,
+					#enTitle#,
+					#position#,
+					#major#,
+					#academicBackground#,
+					#career#,
+					#regId#,
+					#regName#,
+					#regIp#,
+					#orderNum#
+				);
+			END IF;
+		END;
+		END;
+	</procedure>
+	
+	<delete id="deleteProcData">
+		DELETE FROM I_MAJOR_Professor WHERE SEQ = #seq#
+	</delete>
+	
+	<update id="orderNumProc">
+		UPDATE I_MAJOR_Professor SET
+			ORDER_NUM = #orderNum#,
+			MOD_DATE = SYSDATE
+		WHERE SEQ = #seq#
+	</update>
+
+</sqlMap>
