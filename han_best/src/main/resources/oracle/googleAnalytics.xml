@@ -31,11 +31,9 @@
 
 	<insert id="insertDataProc">
 		INSERT INTO I_GOOGLE_ANALYTICS(
-			SEQ,
 			CONTENTS,
 			USE_YN
 		) VALUES(
-			IWORK_SEQUENCE.NEXTVAL ,
 			#contents#,
 			#useYn#
 		)
@@ -45,7 +43,7 @@
 		UPDATE I_GOOGLE_ANALYTICS SET
 			CONTENTS  = #contents#,
 			USE_YN = #useYn#,
-			MOD_DATE  = SYSDATE
+			MOD_DATE  = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 

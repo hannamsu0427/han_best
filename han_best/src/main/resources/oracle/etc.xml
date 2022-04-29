@@ -19,7 +19,6 @@
 	<insert id="insertProcData">
 		INSERT INTO I_ETC (
 			RECORD_SEQ,
-			SEQ,
 			ETC_1,
 			ETC_2,
 			ETC_3,
@@ -27,7 +26,6 @@
 			ETC_5
 		) VALUES(
 			#recordSeq#,
-			IWORK_SEQUENCE.NEXTVAL,
 			#etc1#,
 			#etc2#,
 			#etc3#,

@@ -26,8 +26,8 @@
 			SEQ,
 			CONTENTS,
 			USE_YN,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
-			TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE,
+			DATE_FORMAT(MOD_DATE, '%Y-%m-%d') AS MOD_DATE
 		FROM I_SWEARWORD
 		WHERE 1=1
 		<isNotEmpty prepend="AND" property="useYn">
@@ -37,11 +37,9 @@
 
 	<insert id="insertDataProc">
 		INSERT INTO I_SWEARWORD(
-			SEQ,
 			CONTENTS,
 			USE_YN
 		) VALUES(
-			IWORK_SEQUENCE.NEXTVAL,
 			#contents#,
 			#useYn#
 		)
@@ -51,7 +49,7 @@
 		UPDATE I_SWEARWORD SET
 			CONTENTS  = #contents#,
 			USE_YN = #useYn#,
-			MOD_DATE  = SYSDATE
+			MOD_DATE  = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 

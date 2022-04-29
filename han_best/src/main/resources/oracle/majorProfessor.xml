@@ -148,7 +148,7 @@
 					MAJOR = #major#,
 					ACADEMIC_BACKGROUND = #academicBackground#,
 					CAREER = #career#,
-					MOD_DATE = SYSDATE
+					MOD_DATE = SYSDATE()
 				WHERE SEQ = I_SEQ;
 			ELSE
 				INSERT INTO I_MAJOR_Professor (
@@ -192,7 +192,7 @@
 	<update id="orderNumProc">
 		UPDATE I_MAJOR_Professor SET
 			ORDER_NUM = #orderNum#,
-			MOD_DATE = SYSDATE
+			MOD_DATE = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 

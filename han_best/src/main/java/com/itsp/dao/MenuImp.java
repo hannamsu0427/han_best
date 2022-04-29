@@ -37,6 +37,18 @@ public class MenuImp extends SqlMapClientDaoSupport implements MenuDao {
 		// TODO Auto-generated method stub
 		return (String) getSqlMapClientTemplate().queryForObject("menu.menuMaxSiblingSortOder", parentSeq);
 	}
+	
+	@Override
+	public void insertDataProc(MenuVO menuVO) {
+		// TODO Auto-generated method stub
+		getSqlMapClientTemplate().insert("menu.insertDataProc", menuVO);
+	}
+	
+	@Override
+	public void updateDataProc(MenuVO menuVO) {
+		// TODO Auto-generated method stub
+		getSqlMapClientTemplate().update("menu.updateDataProc", menuVO);
+	}
 
 	@Override
 	public void saveDataProc(MenuVO menuVO) {

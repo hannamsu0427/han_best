@@ -11,7 +11,7 @@
 	<update id="functionUpdate">
 		update cddb.kch910m
 		set acc_status = 'N',
-			acc_date = sysdate
+			acc_date = SYSDATE()
 		where user_id = #user_id#
 	</update>
 	

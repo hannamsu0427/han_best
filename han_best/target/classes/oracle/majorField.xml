@@ -62,7 +62,7 @@
 					USE_YN = #useYn#,
 					GROUP_TXT = #group#,
 					GROUP_INFO = #groupInfo#,
-					MOD_DATE = SYSDATE
+					MOD_DATE = SYSDATE()
 				WHERE SEQ = I_SEQ;
 			ELSE
 				INSERT INTO I_MAJOR_FIELD (
@@ -98,7 +98,7 @@
 	<update id="orderNumProc">
 		UPDATE I_MAJOR_FIELD SET
 			ORDER_NUM = #orderNum#,
-			MOD_DATE = SYSDATE
+			MOD_DATE = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 

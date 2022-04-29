@@ -60,7 +60,7 @@
 				UPDATE I_MAJOR_GOAL SET
 					USE_YN = #useYn#,
 					GOAL_TXT = #goalTxt#,
-					MOD_DATE = SYSDATE
+					MOD_DATE = SYSDATE()
 				WHERE SEQ = I_SEQ;
 			ELSE
 				INSERT INTO I_MAJOR_GOAL (
@@ -94,7 +94,7 @@
 	<update id="orderNumProc">
 		UPDATE I_MAJOR_GOAL SET
 			ORDER_NUM = #orderNum#,
-			MOD_DATE = SYSDATE
+			MOD_DATE = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 

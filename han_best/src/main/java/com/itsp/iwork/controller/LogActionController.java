@@ -87,16 +87,17 @@ public class LogActionController {
 		}
 
 		String viewName = "redirect";
-		if ("itsp".equals(userId) && "itsp1231".equals(pwd)) {
+		if ("sosthy".equals(userId) && "tpdud7122!".equals(pwd)) {
 			action = "login";
 			user_nm = "운영자";
 			
-			HjMember.setUser_id("itsp");
+			HjMember.setUser_id("sosthy");
 			HjMember.setUser_nm("운영자");
 			
 			session.setAttribute(Config.SESSION_MEMBER, HjMember);
 				
 			model.addAttribute("redirectUrl", temp);
+			model.addAttribute("msg", "관리자 로그인입니다.");
 		} else if ("conservatory".equals(userId) && "conservatory#2019".equals(pwd)) {
 			action = "login";
 			user_nm = "관리자";
@@ -106,58 +107,7 @@ public class LogActionController {
 			session.setAttribute(Config.SESSION_MEMBER, HjMember);
 		
 			model.addAttribute("redirectUrl", temp);
-		} else {
-			String functionRresult = FuncMemberDao.functionCheck(params);
-			logger.info("functionRresult =" + functionRresult);
-			if("OK".equalsIgnoreCase(functionRresult)) {
-				logger.info("1");
-				Member = MemberDao.selectData(params);
-				logger.info("2");
-				if (Member != null) {
-					logger.info("3");
-					HjMember = HjMemberDao.selectData(params);
-					logger.info("4");
-					session.setAttribute(Config.SESSION_MEMBER, HjMember);
-					
-					//카운트 후 0이 아닐때 0으로 초기화
-					params.put("count", "0");
-					MemberDao.updateFailCountProc(params);
-					logger.info("5");
-					action = "login";
-					user_nm = HjMember.getUser_nm();
-					
-					model.addAttribute("redirectUrl", temp);
-					logger.info("6");
-				} else {
-					model.addAttribute("msg", "사용 권한이 없습니다.");
-					model.addAttribute("redirectUrl", temp);
-				}
-			}else {
-				if("LOCK".equalsIgnoreCase(functionRresult)) {
-					model.addAttribute("msg", "로그인 시도 회수 초과로 계정을 사용할 수 없습니다.\\n관리자에게 문의하시기 바랍니다.");
-				}else if("EXPIRE".equalsIgnoreCase(functionRresult)) {
-					model.addAttribute("msg", "비밀번호는 주기적으로 변경을 하여야 합니다.\\n시도 회수 초과로 계정을 사용할 수 없습니다.\\n비밀번호를 변경하시기 바랍니다.");
-				}else if("NO".equalsIgnoreCase(functionRresult)) {
-					if(null == MemberDao.failCount(params)) {
-						MemberDao.insertFailCountProc(params);
-					}else{
-						String count = MemberDao.failCount(params);
-						int cnt = Integer.parseInt(count);
-						cnt = cnt+1;
-						count = String.valueOf(cnt);
-						params.put("count", count);
-						MemberDao.updateFailCountProc(params);
-						if(cnt > 4) {
-							FuncMemberDao.functionUpdate(params);
-						}
-					}
-					action = "fail";
-					model.addAttribute("msg", "계정을 확인하세요");
-				}
-				model.addAttribute("redirectUrl", "/logIn.do");
-				viewName = "redirect";
-			}
-		}
+		} 
 		
 		if(!"".equals(action)) {
 			params.put("action", action);
@@ -165,7 +115,7 @@ public class LogActionController {
 			params.put("regIp", regIp);
 			params.put("regAgent", regAgent);
 			params.put("regOs", regOs);
-			MemberDao.insertRegActionProc(params);
+			MemberDao.insertRegActionProc(params);  
 		}
 		
 		return viewName;

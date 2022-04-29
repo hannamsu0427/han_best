@@ -50,8 +50,8 @@
 				OR
 				(
 					USE_YN = 'Y' AND SETTING = 'D' 
-					AND SYSDATE <![CDATA[>=]]> to_date(START_DATE, 'YYYY-MM-DD')
-					AND SYSDATE <![CDATA[<]]> to_date(END_DATE, 'YYYY-MM-DD') +1
+					AND SYSDATE() <![CDATA[>=]]> DATE_FORMAT(START_DATE, '%Y-%m-%d')
+					AND SYSDATE() <![CDATA[<]]> DATE_FORMAT(END_DATE, '%Y-%m-%d') +1
 				)
 			)
 			</isEqual>
@@ -62,9 +62,9 @@
 	</select>
 	
 	<select id="selectDataList" resultMap="MapForList">
-		SELECT *FROM (
-			SELECT ROWNUM AS RNUM2,B.* FROM (
-				SELECT ROWNUM AS RNUM,A.* FROM (
+		SELECT C.*FROM ( 			
+		SELECT @ROWNUM2:=@ROWNUM2+1 AS RNUM2, B.* FROM( 				
+			SELECT @ROWNUM:=@ROWNUM+1 AS RNUM, A.* FROM( 
 					SELECT
 						SEQ,
 						TITLE,
@@ -76,8 +76,8 @@
 						LINK_URL,
 						START_DATE,
 						END_DATE,
-						TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
-						TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE,
+						DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE,
+						DATE_FORMAT(MOD_DATE, '%Y-%m-%d') AS MOD_DATE,
 						ORDER_NUM
 					FROM I_VISUAL X
 					WHERE 1=1
@@ -90,8 +90,8 @@
 							OR
 							(
 								USE_YN = 'Y' AND SETTING = 'D' 
-								AND SYSDATE <![CDATA[>=]]> to_date(START_DATE, 'YYYY-MM-DD')
-								AND SYSDATE <![CDATA[<]]> to_date(END_DATE, 'YYYY-MM-DD') +1
+								AND SYSDATE() <![CDATA[>=]]> DATE_FORMAT(START_DATE, '%Y-%m-%d')
+								AND SYSDATE() <![CDATA[<]]> DATE_FORMAT(END_DATE, '%Y-%m-%d') +1
 							)
 						)
 						</isEqual>
@@ -100,9 +100,9 @@
 						</isNotEqual>	
 					</isNotEmpty>
 					ORDER BY ORDER_NUM ASC, SEQ DESC
-				) A
-			) B
-		)
+				) A, (SELECT @ROWNUM := 0) TMP 
+			)  B, (SELECT @ROWNUM2 := 0) TMP
+		)C
 		WHERE 1=1
 		<isNotEmpty prepend="AND" property="startNum">
 			RNUM2 BETWEEN #startNum#
@@ -122,8 +122,8 @@
 			LINK_URL,
 			START_DATE,
 			END_DATE,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
-			TO_CHAR(MOD_DATE, 'YYYY-MM-DD') AS MOD_DATE,
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE,
+			DATE_FORMAT(MOD_DATE, '%Y-%m-%d') AS MOD_DATE,
 			ORDER_NUM
 		FROM I_VISUAL
 		WHERE 1=1
@@ -169,7 +169,7 @@
 			LINK_URL  = #linkUrl#,
 			START_DATE  = #startDate#,
 			END_DATE  = #endDate#,
-			MOD_DATE = SYSDATE,
+			MOD_DATE = SYSDATE(),
 			ORDER_NUM = #orderNum#
 		WHERE SEQ = #seq#
 	</update>
@@ -182,7 +182,7 @@
 	<update id="orderNumProc">
 		UPDATE I_VISUAL SET
 			ORDER_NUM = #orderNum#,
-			MOD_DATE = SYSDATE
+			MOD_DATE = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 	

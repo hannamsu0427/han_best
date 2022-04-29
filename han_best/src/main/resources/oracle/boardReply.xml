@@ -35,7 +35,7 @@
 			IF I_COUNT <![CDATA[<>]]> 0 THEN
 				UPDATE I_BOARD_RECORD_REPLY SET
 					CONTENTS = <![CDATA[ #contents#]]>,
-					MOD_DATE = SYSDATE,
+					MOD_DATE = SYSDATE(),
 					MOD_ID = #modId#,
 					MOD_IP = #modIp#
 				WHERE SEQ = I_SEQ;

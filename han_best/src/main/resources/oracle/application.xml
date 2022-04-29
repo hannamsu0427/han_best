@@ -47,7 +47,7 @@
 					SUCCESSFUL_PERIOD = #successfulPeriod#,
 					APPLICATION_CODE = #applicationCode#,
 					SUCCESSFUL_CODE = #successfulCode#,
-					MOD_DATE = SYSDATE
+					MOD_DATE = SYSDATE()
 				WHERE SEQ = I_SEQ;
 			ELSE
 				INSERT INTO I_APPLICATION (

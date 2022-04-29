@@ -67,8 +67,8 @@
 			CONTENTS,
 			REG_ID,
 			REG_NAME,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE,
+			DATE_FORMAT(REG_DATE, '%y-%m-%d %H:%i:%s') AS REG_DATE_FMT,
 			DEL_YN,
 			START_YEAR,
 			START_MONTH,
@@ -98,8 +98,8 @@
 			CONTENTS,
 			REG_ID,
 			REG_NAME,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI') AS REG_DATE_FMT,
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE,
+			DATE_FORMAT(REG_DATE, '%y-%m-%d %H:%i:%s') AS REG_DATE_FMT,
 			DEL_YN,
 			START_YEAR,
 			START_MONTH,
@@ -130,7 +130,7 @@
 					END_YEAR = #endYear#,
 					END_MONTH = #endMonth#,
 					END_DAY = 	#endDay#,	
-					MOD_DATE = SYSDATE,
+					MOD_DATE = SYSDATE(),
 					MOD_ID = #modId#,
 					MOD_IP = #modIp#
 				WHERE SEQ = I_SEQ;
@@ -172,7 +172,7 @@
 	<update id="useProcData">
 		UPDATE I_HISTORY_RECORD SET
 			DEL_YN = #delYn#,
-			MOD_DATE = SYSDATE
+			MOD_DATE = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 	

@@ -120,7 +120,7 @@
 					INSA_URL = #insaUrl#,
 					ICO_YTUBE = #icoYtube#,
 					YTUBE_URL = #ytubeUrl#,
-					MOD_DATE = SYSDATE
+					MOD_DATE = SYSDATE()
 				WHERE SEQ = I_SEQ;
 			ELSE
 				INSERT INTO I_MAJOR_INTRO (
@@ -174,7 +174,7 @@
 	<update id="orderNumProc">
 		UPDATE I_MAJOR_INTRO SET
 			ORDER_NUM = #orderNum#,
-			MOD_DATE = SYSDATE
+			MOD_DATE = SYSDATE()
 		WHERE SEQ = #seq#
 	</update>
 

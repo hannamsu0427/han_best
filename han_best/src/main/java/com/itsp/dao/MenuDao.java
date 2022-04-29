@@ -20,6 +20,11 @@ public interface MenuDao {
 	public void saveDataProc(MenuVO menuVO);
 
 	public void deleteDataProc(String seq);
+	
+	public void insertDataProc(MenuVO menuVO);
+	
+	public void updateDataProc(MenuVO menuVO);
+	
 
 	// 네비게이션
 	public List<MenuVO> menuSelectTitle(HashMap paramMap);

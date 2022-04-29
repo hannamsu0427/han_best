@@ -51,7 +51,7 @@
 	</select>
 
 	<select id="menuMaxSiblingSortOder" resultClass="String" parameterClass="String">
-		SELECT NVL(max(SORT_ORDER), 0) FROM I_MENU
+		SELECT IFNULL(max(SORT_ORDER), 0) FROM I_MENU
 		WHERE PARENT_SEQ = #parentSeq#
 	</select>
 
@@ -89,6 +89,57 @@
 		</iterate>
 		ORDER BY SORT_ORDER
 	</select>
+	
+	
+	<insert id="insertDataProc">
+		INSERT INTO I_MENU (
+			TITLE,
+			DEPTH,
+			PARENT_SEQ,
+			SORT_ORDER,
+			TREE_TYPE,
+			TYPE,
+			URL,
+			LINK_TARGET,
+			INCLUDE_PATH,
+			CONFIG_SEQ,
+			CATEGORY_SEQ,
+			RECORD_SEQ,
+			EXPLANATION,
+			USE_YN
+		) VALUES(
+			#title#,
+			#depth#,
+			#parentSeq#,
+			#sortOrder#,
+			#treeType#,
+			#type#,
+			#url#,
+			#linkTarget#,
+			#includePath#,
+			#configSeq#,
+			#categorySeq#,
+			#recordSeq#,
+			#explanation#,
+			#useYn#
+		)
+	</insert>
+	
+	<update id="updateDataProc">
+		UPDATE I_MENU SET
+			USE_YN = <![CDATA[ #useYn#]]>,
+			TITLE = <![CDATA[#title#]]>,
+			EXPLANATION = <![CDATA[ #explanation#]]>,
+			TREE_TYPE  = <![CDATA[ #treeType#]]>,
+			TYPE = <![CDATA[ #type#]]>,
+			URL = <![CDATA[ #url#]]>,
+			LINK_TARGET = <![CDATA[ #linkTarget#]]>,
+			INCLUDE_PATH = <![CDATA[ #includePath#]]>,
+			CONFIG_SEQ = <![CDATA[ #configSeq#]]>,
+			CATEGORY_SEQ = <![CDATA[ #categorySeq#]]>,
+			RECORD_SEQ = <![CDATA[ #recordSeq#]]>
+		WHERE SEQ = #seq#
+	</update>
 
 	<procedure id="saveDataProc">
 		DECLARE 

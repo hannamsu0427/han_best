@@ -54,7 +54,6 @@
 		
 	<insert id="insertDataProc">
 		INSERT INTO I_VISIT_RECORD (
-			SEQ,
 			REG_IP,
 			REG_YEAR,
 			REG_MONTH,
@@ -63,7 +62,6 @@
 			REG_AGENT,
 			REG_OS
 		) VALUES(
-			IWORK_SEQUENCE.NEXTVAL ,
 			#regIp#,
 			#regYear#,
 			#regMonth#,
@@ -93,7 +91,7 @@
 			REG_YEAR = #regYear#
 		</isNotEmpty>
 		<isNotEmpty prepend="AND" property="regDay">
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD') = #regDay#
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') = #regDay#
 		</isNotEmpty>
 		ORDER BY REG_DATE DESC
 	</select>
@@ -111,7 +109,7 @@
 			REG_YEAR = #regYear#
 		</isNotEmpty>
 		<isNotEmpty prepend="AND" property="toDay">
-			to_char(SYSDATE, 'YYYY-MM-DD') = to_char(REG_DATE, 'YYYY-MM-DD')
+			DATE_FORMAT(SYSDATE(), '%Y-%m-%d') = DATE_FORMAT(REG_DATE, '%Y-%m-%d')
 		</isNotEmpty>
 	</select>
 	

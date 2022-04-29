@@ -28,7 +28,7 @@
 			FILE_TYPE,
 			EXPLANATION,
 			FILE_SIZE,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE
 		FROM I_ATTACH_FILE
 		WHERE 1=1
 		AND PARENT_SEQ = #parentSeq#
@@ -45,7 +45,7 @@
 			FILE_TYPE,
 			EXPLANATION,
 			FILE_SIZE,
-			TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE
 		FROM I_ATTACH_FILE
 		WHERE 1=1
 		AND SEQ = #seq#
@@ -57,7 +57,6 @@
 	
 	<insert id="insertDataProc">
 		INSERT INTO I_ATTACH_FILE (
-			SEQ ,
 			PARENT_SEQ ,
 			REAL_FILE_NAME ,
 			REAL_FILE_PATH ,
@@ -67,7 +66,6 @@
 			EXPLANATION ,
 			FILE_SIZE
 		) VALUES(
-			IWORK_SEQUENCE.NEXTVAL ,
 			#parentSeq# ,
 			#realFileName# ,
 			#realFilePath# ,

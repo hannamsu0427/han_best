@@ -88,7 +88,7 @@
 					CONTENTS = #contents#,
 					TYPE = #type#,
 					INCLUDE_PATH = #includePath#,
-					MOD_DATE = SYSDATE
+					MOD_DATE = SYSDATE()
 				WHERE SEQ = I_SEQ;
 			ELSE
 				INSERT INTO I_MAJOR_COURSE (

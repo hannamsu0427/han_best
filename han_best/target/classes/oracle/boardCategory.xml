@@ -41,7 +41,7 @@
 				UPDATE I_BOARD_CATEGORY SET
 					CATEGORY_NAME = <![CDATA[ #categoryName#]]>,
 					USE_YN = #useYn#,
-					MOD_DATE = SYSDATE
+					MOD_DATE = SYSDATE()
 				WHERE CATEGORY_SEQ = I_SEQ;
 			ELSE
 				INSERT INTO I_BOARD_CATEGORY (
@@ -69,7 +69,7 @@
 	<update id="orderNumProc">
 		UPDATE I_BOARD_CATEGORY SET
 			ORDER_NUM = #orderNum#,
-			MOD_DATE = SYSDATE
+			MOD_DATE = SYSDATE()
 		WHERE CATEGORY_SEQ = #categorySeq#
 	</update>
 

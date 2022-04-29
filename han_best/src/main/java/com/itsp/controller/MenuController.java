@@ -77,8 +77,8 @@ public class MenuController {
 
 		boolean isInsert = ("".equals(CommUtils.checkNull(menuVO.getSeq())));
 		if (isInsert) {
-			String seq = menuDao.seqNextVal();
-			menuVO.setSeq(seq);
+			//String seq = menuDao.seqNextVal();
+			//menuVO.setSeq(seq);
 		}
 
 		String parentSeq = menuVO.getParentSeq();
@@ -123,7 +123,11 @@ public class MenuController {
 		}
 		*/
 		try {
-			menuDao.saveDataProc(menuVO);
+			if (isInsert) {
+				menuDao.insertDataProc(menuVO);
+			}else {
+				menuDao.updateDataProc(menuVO);
+			}			
 			responseHeader.setCode(ResponseHeaderVO.SUCCESS);
 		} catch (Exception e) {
 			e.printStackTrace();
